@@ -1,4 +1,4 @@
-function [output] = checkHit(H,n,k,eps)
+function [output] = checkHit(H,vec)
 %UNTITLED6 Summary of this function goes here
 %   Detailed explanation goes here
 output = 1;
