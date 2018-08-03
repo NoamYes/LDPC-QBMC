@@ -1,8 +1,12 @@
 function [loutput] = checkHit(H, vec, iterLen, QM)
 
-tmp = vec;
+old_tmp = vec;
 for i = 1:iterLen %run iterLen iterations of the function iter
-    tmp = iter(H,tmp,QM);
+    tmp = iter(H,old_tmp,QM);
+    if tmp == old_tmp %added this for optimization
+        break;
+    end
+    old_tmp = tmp;
 end
 loutput = sum(tmp) == 0; %check if after iterLen iterations we get back to 0 vec
 

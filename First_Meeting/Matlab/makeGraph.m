@@ -1,7 +1,7 @@
-n = 700;
-k = 400;
+n = 70;
+k = 40;
 QM = 2; %the question mark value > 0
-iterLen = 2000; %how many iterations for the matrix algo
+iterLen = n; %how many iterations for the matrix algo
 inc = 0.05; %how much to increment epsilon
 tryNum = 1000; %how many matrixes to generate for a given epsilon
 eps_vec = 0:inc:1;
