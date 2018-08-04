@@ -23,7 +23,7 @@ figure(1)
 plot(eps_vec,noise_vec);
 hold on
 plot(eps_vec,eps_vec);
-title('First Graph title');
-legend('noise graph','y=x')
-xlabel('probabilty of noise [{\epsilon}]');
-ylabel('mean erase probabiulty');
+title('ratio of erasures after decoding with random noise VS erasure probablity');
+legend('Erasure','y=x')
+xlabel('Probablity Of Erasure [{\epsilon}]');
+ylabel('Erasure Rate');
