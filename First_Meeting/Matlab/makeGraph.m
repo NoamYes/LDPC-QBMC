@@ -20,3 +20,6 @@ end
 
 figure(1)
 plot(eps_vec,hit_vec);
+title('ratio of erasures after decoding with random noise VS erasure probablity');
+xlabel('Probablity Of Erasure');
+ylabel('Erasure Rate');

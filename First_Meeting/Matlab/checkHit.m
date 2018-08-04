@@ -8,7 +8,9 @@ for i = 1:iterLen %run iterLen iterations of the function iter
     end
     old_tmp = tmp;
 end
-loutput = sum(tmp) == 0; %check if after iterLen iterations we get back to 0 vec
+% loutput = sum(tmp) == 0; %check if after iterLen iterations we get back to 0 vec
+
+loutput = sum(tmp~=0)/length(tmp); % return the ratio of erasures after decoding
 
 end
 
