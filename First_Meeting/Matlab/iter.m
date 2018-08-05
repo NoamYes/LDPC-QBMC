@@ -12,7 +12,7 @@ function [out_vec] = iter(H, vec, QM)
         %% not cheating:
         %xor_vec = logical(H(change_vec(i),:));
         %xor_vec(tmp) = 0;
-        %out_vec(tmp) = xor(vec(xor_vec)); %don't know how to do this - xor on
+        %out_vec(tmp) = mod(sum(vec(xor_vec)),2); 
         %all the items in the array
 
 

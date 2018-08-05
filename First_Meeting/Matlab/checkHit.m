@@ -1,4 +1,4 @@
-function [loutput] = checkHit(H, vec, iterLen, QM)
+function [output] = checkHit(H, vec, iterLen, QM)
 
 old_tmp = vec;
 for i = 1:iterLen %run iterLen iterations of the function iter
@@ -10,7 +10,7 @@ for i = 1:iterLen %run iterLen iterations of the function iter
 end
 % loutput = sum(tmp) == 0; %check if after iterLen iterations we get back to 0 vec
 
-loutput = sum(tmp~=0)/length(tmp); % return the ratio of erasures after decoding
+output = sum(tmp~=0)/length(tmp); % return the ratio of erasures after decoding
 
 end
 
