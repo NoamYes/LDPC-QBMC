@@ -10,11 +10,9 @@ function [out_vec] = iter(H, vec, QM)
 
 
         %% not cheating:
-        %xor_vec = logical(H(change_vec(i),:));
-        %xor_vec(tmp) = 0;
-        %out_vec(tmp) = mod(sum(vec(xor_vec)),2); 
-        %all the items in the array
-
+%         xor_vec = logical(H(change_vec(i),:));
+%         xor_vec(tmp) = 0;
+%         out_vec(tmp) = mod(sum(vec(xor_vec)),2);
 
         %% Trying generic method (with 1's optional)
 
