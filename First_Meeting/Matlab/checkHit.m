@@ -13,4 +13,4 @@ end
 output = sum(tmp~=0)/length(tmp); % return the ratio of erasures after decoding
 
 end
-
+%Dore is here
