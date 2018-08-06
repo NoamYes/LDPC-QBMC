@@ -1,12 +1,12 @@
 clc; clear all; close all;
 
-for n = 100:100:1000
-%   n = 100; %n
+% for n = 1000:1000:10000
+    n = 1000; %n
     k = round(n/2); %k
     QM = 2; %the question mark value > 0
     iterLen = 100; %how many iterations for the matrix algo
-    inc = 0.1; %how much to increment epsilon
-    tryNum = 100; %how many matrixes to generate for a given epsilon
+    inc = 0.05; %how much to increment epsilon
+    tryNum = 1000; %how many matrixes to generate for a given epsilon
 
     eps_vec = 0:inc:1;
     noise_vec = zeros(1,length(eps_vec));
@@ -20,7 +20,7 @@ for n = 100:100:1000
         end
         noise_vec(count) = mean(totalNoise);
         count = count + 1;
-    end
+     end
 
     figure(1)
     plot(eps_vec,noise_vec); hold on
@@ -29,4 +29,4 @@ for n = 100:100:1000
     legend('Erasure','y=x')
     xlabel('Probablity Of Erasure [{\epsilon}]');
     ylabel('Erasure Rate');
-end
+% end
