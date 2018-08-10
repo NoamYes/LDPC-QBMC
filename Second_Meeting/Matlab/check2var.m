@@ -1,13 +1,40 @@
-function [var] = check2var(Mat, QM)
+function [c2v_cell] = check2var(v2c_cell, c_adj,QM)
 
-var = zeros(1,length(Mat));
-    for i = 1:length(Mat)
-        if isempty(find(~Mat(i,:), 1)) %if we didn't find 0 in the row i in
-            %the matrix, put a QM in the var vector.
-            var(i) = QM;
-        else
-            var(i) = 0;
+        %% check
+        
+        c2v_cell = c_adj;
+        Ctmp = init_c(v2c_cell, c_adj);
+        
+        for i = 1:length(c_adj)
+            
+            for j = 1:length(c_adj{i})
+            
+                
+                check_to_pass = Ctmp;
+                check_to_pass{i}(j) = 0;
+                c2v_cell{i}(j) = fc(check_to_pass{i}, QM);
+                check_to_pass = Ctmp;
+                
+%                 var_to_pass = v2c_cell;
+%                 var_to_pass{c_adj{i}(j),:} = 0;
+
+                
+            end
+            
         end
-    end
+   
+
     
- end
+end
+
+     function C = init_c(v2c_cell, c_adj)
+     
+        C = c_adj;
+        for i = 1:length(c_adj)
+            
+            for j = 1:length(c_adj{i})
+                C{i}(j)=v2c_cell{c_adj{i}(j)}(1);
+            end
+        end
+     end
+     
