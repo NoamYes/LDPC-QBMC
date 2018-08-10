@@ -7,7 +7,7 @@ function [ H ] = Generate_LDCP_H( dv, dc, m, n )
  end
  ns = round(n/dc);
  ms = round((n-m)/ns);
- H = zeros([n-m,n]);
+%  H = zeros([n-m,n]);
  
  H1 = zeros(ns,ns*dc);
  H1(1,1:dc) = ones(1,dc);
