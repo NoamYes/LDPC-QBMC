@@ -1,7 +1,7 @@
 function [ H ] = Generate_LDCP_H( dv, dc, m, n )
 %% dv - dimension of variables (1's num in columns)
 %% dc - dimension of checks (1's num in rows)
-%% n,k arguments - size required for H
+%% n,m arguments - size required for H
 if ( n-m < dc || n < dv)
     error('Wrong Parameters');
 end
@@ -13,7 +13,7 @@ H1 = zeros(ns,ns*dc);
 H1(1,1:dc) = ones(1,dc);
 
 for i=2:ns
-    H1(i,:) = circshift(H1(i-1,:),dc);
+    H1(i,:) = circshift(H1(i-1,:),[0 dc]);
     %      H(i,(i-1)*dc+1:i*dc) = ones(1,dc);
 end
 H = H1;
