@@ -1,4 +1,5 @@
 function [ decoded ] = Iter_Method( H, noised, QM )
+tic
 % this function basically takes the added noise transmitted vector
 % given the H parity Check Matrix and return the decoded vec
 % base on this code, all using message passing and iterations
@@ -50,6 +51,6 @@ end
 %should be the decoded word, final var2c_itr contains the final word
 
 decoded = deCell(var2c_itr, QM);
-
+toc
 end
 
