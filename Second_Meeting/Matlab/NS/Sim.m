@@ -8,7 +8,7 @@ H =  [1, 1, 0, 1, 1, 0, 0;
 
 QM =-1;
 noised = [ 0 QM QM 1 0 QM 0];
-decoded1 = Iter_Method(H, noised, QM);
+decoded1 = iter(H, noised, QM,100);
 
 
 H =  [1, 0, 1, 1, 0, 0; 
@@ -16,16 +16,16 @@ H =  [1, 0, 1, 1, 0, 0;
 0, 1, 1, 0, 0, 1]; 
 
 noised = [ QM 0 1 QM 1 QM];
-decoded2 = Iter_Method(H, noised, QM);
+decoded2 = iter(H, noised, QM,100);
 
 
 %%
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
-    n = 50; %n
+    n = 102; %n
     k = round(n/2); %k
-    QM = -1; %the question mark value > 0
+    QM = 2; %the question mark value > 0
     inc = 0.05;
     tryNum = 10; %how many matrixes to generate for a given epsilon
 
@@ -44,8 +44,9 @@ decoded2 = Iter_Method(H, noised, QM);
             for j = 1:tryNum
                 vec = BECnoise(n, eps, QM); %generate a 0 vec with random noise
                 tic
-                decoded_word = Iter_Method(H, vec, QM);
-                toc;
+                decoded_word = iter(H, vec, QM,100);
+                time = toc;
+                time*2e5/(3600)
                 itr_e_rate = mean(abs(decoded_word));
                 H_e_rate = H_e_rate + itr_e_rate;
             end

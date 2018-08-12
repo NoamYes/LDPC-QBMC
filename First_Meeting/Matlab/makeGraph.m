@@ -15,8 +15,10 @@ clc; clear all; close all;
     for eps = eps_vec %run on epsilon values from 0 to 1 in increments of inc
         totalNoise = zeros(1, tryNum);
         for i = 1:tryNum
+            tic
             vec = BECnoise(n, eps, QM); %generate a 0 vec with random noise
             totalNoise(i) = checkNoise(H, vec, iterLen, QM);
+            toc
         end
         noise_vec(count) = mean(totalNoise);
         count = count + 1;

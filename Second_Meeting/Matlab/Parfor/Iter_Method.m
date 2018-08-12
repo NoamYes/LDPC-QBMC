@@ -18,7 +18,7 @@ v_c_adj = accumarray(r, c, [size(H.',1), 1], @(L) {L.'} );
 % first, variables trasmit the noise vector, initialize var2check
 
 var_tmp = v_c_adj;
-for i = 1:length(noised)
+parfor i = 1:length(noised)
     var_tmp{i}(:) = noised(i);
 end
 
@@ -27,7 +27,7 @@ var2c_itr = var_tmp;
 c2v_init = c_v_adj;
 
 % initialize check2var to be all QM
-for i = 1:length(c_v_adj)
+parfor i = 1:length(c_v_adj)
     for j = 1:length(c_v_adj{i})
         c2v_init{i}(j)=QM;
     end

@@ -17,5 +17,4 @@ function [Mat] = var2check(i_Mat, H, var)
             end
         end
     end
-    
 end
