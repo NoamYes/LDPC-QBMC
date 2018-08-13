@@ -39,19 +39,16 @@ decoded2 = iter(H, noised, QM,100);
         totalNoise = zeros(1, tryNum);
         H_e_rate = 0;
         eps_e_rate = 0;
-        for i = 1:tryNum
+        parfor i = 1:tryNum
             [ H ] = Generate_LDCP_H( dv, dc, k, n ); %generate a random H matrix
-            for j = 1:tryNum
+            parfor j = 1:tryNum
                 vec = BECnoise(n, eps, QM); %generate a 0 vec with random noise
-                tic
                 decoded_word = iter(H, vec, QM,100);
-                time = toc;
-                time*2e5/(3600)
                 itr_e_rate = mean(abs(decoded_word));
                 H_e_rate = H_e_rate + itr_e_rate;
             end
             
-        eps_e_rate = eps_e_rate + H_e_rate;
+            eps_e_rate = eps_e_rate + H_e_rate;
         end
         
         total_e_rate(i) = eps_e_rate;

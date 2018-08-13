@@ -8,14 +8,14 @@ function [Mat] = var2check(i_Mat, H, var)
     [row, ~] = size(H);
     for check = 1:row %run on all the checks
         var_loc = find(~(H(check, :) - 1)); %find the location of the 1's
-        % in the check equation in H.
-        for i = var_loc %run on all the variables in the check
+        % in the cheack equation in H.
+        for idx = 1:numel(var_loc) %run on all the variables in the check
+            tmp_var_loc = var_loc(idx);
             tmp_vec = H(check, :);
-            tmp_vec(i) = 0; %remove the 1 of variable var_loc, so we can check him            
+            tmp_vec(tmp_var_loc) = 0; %remove the 1 of variable var_loc, so we can check him            
             if tmp_vec * var.' == 0 %if all the other vars in check are 0
-                Mat(check, i) = 0; %put in zero in the matrix
+                Mat(check, tmp_var_loc) = 0; %put in zero in the matrix
             end
         end
     end
-    
 end
