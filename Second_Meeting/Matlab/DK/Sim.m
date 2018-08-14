@@ -4,15 +4,15 @@ tic
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
-n = 1002; %n
+n = 36; %n
 k = round(n/2); %k
 QM = 2; %the question mark value > 0
-inc = 0.05;
+inc = 0.005; %how to increment the epsilon vector
 tryMat = 100; %how many matrixes to generate for a given epsilon
-tryVec = 100;
-iterLen = 100;
+tryVec = 200; %how many noise vector to test each time
+iterLen = 100; %how long will each code iteration be
 
-eps_vec = 0.3:inc:0.6;
+eps_vec = 0.35:inc:0.45;
 dv = 3; 
 dc = 6;
 
@@ -36,6 +36,7 @@ parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments o
 %             round(toc,1)+" (sec)");
     end
     mean_vec(idx) = mean(mean(totalNoise));
+    tic;
 end
 
 figure(1)

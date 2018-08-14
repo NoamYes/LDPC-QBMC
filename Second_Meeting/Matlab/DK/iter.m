@@ -1,4 +1,8 @@
-function [output] = iter(H, vec, QM, iter_len)
+%% this function gets the H matrix and the noise vec as well as the QM and
+% the length of the iterations. it then runs iter_len times the netword
+% iterations (with optimization) and return the noise ratio in the end.
+
+function [NoiseRatio] = iter(H, vec, QM, iter_len)
 
     [row, ~] = size(H);
     Mat = repmat(vec,[row,1]); %initiate a matrix like H with all the repeat
@@ -14,8 +18,8 @@ function [output] = iter(H, vec, QM, iter_len)
         old_var = var;
     end
     
-    new_noise = sum(var(:) == QM);
-    output = new_noise/length(var); %return the ratio of noise
+    end_noise = sum(var(:) == QM);
+    NoiseRatio = end_noise/length(var); %return the ratio of noise
     
 end
 
