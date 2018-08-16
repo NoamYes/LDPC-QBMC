@@ -5,8 +5,8 @@ function [ H ] = Generate_LDCP_H( dv, dc, m, n )
 if ( n-m < dc || n < dv)
     error('Wrong Parameters');
 end
-ns = floor(n/dc);
-ms = floor((n-m)/ns);
+ns = round(n/dc);
+ms = round((n-m)/ns);
 %  H = zeros([n-m,n]);
 
 H1 = zeros(ns,ns*dc);

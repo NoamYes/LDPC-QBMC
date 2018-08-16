@@ -4,7 +4,7 @@ function [c2v_cell] = check2var(c2v_last, v2c_cell, c_adj,QM, v_adj)
 c2v_cell = c2v_last;
 Ctmp = init_c(v2c_cell, c_adj, v_adj);
 
-parfor i = 1:length(c_adj)
+for i = 1:length(c_adj)
     
     for j = 1:length(c_adj{i})
         
@@ -23,13 +23,13 @@ end
 end
 
 
-% this function transparform of the v2c_cell to c2v_cell, i.e - inverse the edges of graph 
+% this function transform of the v2c_cell to c2v_cell, i.e - inverse the edges of graph 
 % isn't an ideal way one would choose to represent graph to work with, but useful in time in this case
 
 function C = init_c(v2c_cell, c_adj, v_adj)
 
 C = c_adj;
-parfor i = 1:length(c_adj)
+for i = 1:length(c_adj)
     
     for j = 1:length(c_adj{i})
         idx = find(v_adj{c_adj{i}(j)} == i);

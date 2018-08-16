@@ -1,20 +1,44 @@
-%% the function gets the Matrix of varCheck, H mat, the var vector and QM
-% it checks each variable in each check what is the value of the other vars
-% and if they are all 0, Matrix in that check and var will be 0, else QM.
+function [v2c_cell] = var2check(v2c_last, c2v_cell, v_adj, QM, c_adj)
 
-function [Mat] = var2check(i_Mat, H, var)
+%% var
 
-    Mat = i_Mat;
-    [row, ~] = size(H);
-    for check = 1:row %run on all the checks
-        var_loc = find(~(H(check, :) - 1)); %find the location of the 1's
-        % in the check equation in H.
-        for i = var_loc %run on all the variables in the check
-            tmp_vec = H(check, :);
-            tmp_vec(i) = 0; %remove the 1 of variable var_loc, so we can check him            
-            if tmp_vec * var.' == 0 %if all the other vars in check are 0
-                Mat(check, i) = 0; %put in zero in the matrix
-            end
+v2c_cell = v2c_last;
+V_tmp = init_v(c2v_cell, v_adj, c_adj);
+
+for i = 1:length(v_adj)
+    
+    for j = 1:length(v_adj{i})
+        
+        var_to_pass = V_tmp;
+        var_to_pass{i}(j) = V_tmp{i}(j);
+        current_node = v2c_last{i}(j);
+        
+        %% fv is activated to transmit var based on last check2var
+        v2c_cell{i}(j) = fv(var_to_pass{i}, QM, current_node);
+        var_to_pass = V_tmp;
+        
+    end
+    
+end
+
+end
+
+
+% this function transforms of the c2v_cell to v2c_cell, i.e - inverse the edges of graph 
+% isn't an ideal way one would choose to represent graph to work with, but useful in time in this case
+
+function V = init_v(c2v_cell, v_adj, c_adj)
+
+V = v_adj;
+for i = 1:length(v_adj)
+    
+    for j = 1:length(v_adj{i})
+        idx = find(c_adj{v_adj{i}(j)} == i);
+        if (~isempty(idx))
+            V{i}(j)=c2v_cell{v_adj{i}(j)}(idx);
         end
     end
 end
+end
+
+

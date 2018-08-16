@@ -7,7 +7,7 @@ for i = 1:length(cellVec)
     
     for j = 1:length(cellVec)
         
-        if isempty(cellVec{i} ~= QM)
+        if isempty(find(cellVec{i} ~= QM, 1))
             
             decoded(i) = QM;
         else

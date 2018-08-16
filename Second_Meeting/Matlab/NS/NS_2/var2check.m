@@ -5,7 +5,7 @@ function [v2c_cell] = var2check(v2c_last, c2v_cell, v_adj, QM, c_adj)
 v2c_cell = v2c_last;
 V_tmp = init_v(c2v_cell, v_adj, c_adj);
 
-parfor i = 1:length(v_adj)
+for i = 1:length(v_adj)
     
     for j = 1:length(v_adj{i})
         
@@ -30,7 +30,7 @@ end
 function V = init_v(c2v_cell, v_adj, c_adj)
 
 V = v_adj;
-parfor i = 1:length(v_adj)
+for i = 1:length(v_adj)
     
     for j = 1:length(v_adj{i})
         idx = find(c_adj{v_adj{i}(j)} == i);

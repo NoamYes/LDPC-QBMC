@@ -1,14 +1,41 @@
-%% the function gets the Matrix and the QM as input and creates a vector of
-%  var so the if there is a 0 in the row, it will be a 0 and if not, a QM.
+function [c2v_cell] = check2var(c2v_last, v2c_cell, c_adj,QM, v_adj)
 
-function [var] = check2var(Mat, QM)
 
-    [~, col] = size(Mat); %get the number of col of the matrix
-    var = zeros(1,col); %create a zero vec in the correct length
-    for i = 1:col
-        if isempty(find(~Mat(:,i), 1)) %if we didn't find 0 in the col i in
-            %the matrix, put a QM in the var vector.
-            var(i) = QM;
+c2v_cell = c2v_last;
+Ctmp = init_c(v2c_cell, c_adj, v_adj);
+
+for i = 1:length(c_adj)
+    
+    for j = 1:length(c_adj{i})
+        
+        check_to_pass = Ctmp;
+        check_to_pass{i}(j) = 0;
+        current_node = Ctmp{i}(j);
+        
+        %% fc is activated to decode the var from parity check
+        c2v_cell{i}(j) = fc(check_to_pass{i}, QM, current_node);
+        check_to_pass = Ctmp;
+        
+    end
+    
+end
+
+end
+
+
+% this function transform of the v2c_cell to c2v_cell, i.e - inverse the edges of graph 
+% isn't an ideal way one would choose to represent graph to work with, but useful in time in this case
+
+function C = init_c(v2c_cell, c_adj, v_adj)
+
+C = c_adj;
+for i = 1:length(c_adj)
+    
+    for j = 1:length(c_adj{i})
+        idx = find(v_adj{c_adj{i}(j)} == i);
+        if (~isempty(idx))
+            C{i}(j)=v2c_cell{c_adj{i}(j)}(idx);
         end
     end
-end 
+end
+end
