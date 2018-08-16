@@ -4,11 +4,11 @@ tic
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
-n = 36; %n
+n = 2004; %n
 k = round(n/2); %k
 QM = -1; %the question mark value > 0
 inc = 0.005; %how to increment the epsilon vector
-tryMat = 40; %how many matrixes to generate for a given epsilon
+tryMat = 10; %how many matrixes to generate for a given epsilon
 tryVec = 200; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 
@@ -30,10 +30,10 @@ parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments o
     mean_mat = zeros(1, tryMat);
     for i = 1:tryMat
         for j = 1:tryVec
-%              tic
+             tic
             vec = BECnoise(n, eps, QM); %generate a 0 vec with random noise
             totalNoise(j,i) = iter(H(:,:,i), vec, QM, iterLen);
-%              toc;
+             toc;
         end
 %         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
 %             round(toc,1)+" (sec)");
@@ -51,8 +51,8 @@ xlabel('Probablity Of Erasure [{\epsilon}]');
 ylabel('Erasure Rate');
 
 dim = [.65 .15 .3 .15];
-% str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
-%     ", d_{c} = " + dc + ", d_{v} = " + dv;
-% annotation('textbox',dim,'String',str,'FitBoxToText','on');
+str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
+    ", d_{c} = " + dc + ", d_{v} = " + dv;
+annotation('textbox',dim,'String',str,'FitBoxToText','on');
 
 toc;
