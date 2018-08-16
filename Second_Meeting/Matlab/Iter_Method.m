@@ -44,7 +44,11 @@ c2v_vec = check2var(c2v_init,var2c_itr, c_v_adj, QM, v_c_adj);
 
 for itr = 1:100
     
+    last = var2c_itr;
     var2c_itr = var2check(var2c_itr, c2v_vec, v_c_adj, QM, c_v_adj);
+    if isequal(last,var2c_itr)
+        break;
+    end
     c2v_vec = check2var(c2v_vec, var2c_itr, c_v_adj, QM, v_c_adj);
     
 end

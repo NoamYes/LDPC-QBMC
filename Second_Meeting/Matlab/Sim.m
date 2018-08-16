@@ -23,11 +23,11 @@ decoded2 = Iter_Method(H, noised, QM);
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
-    n = 50; %n
+    n = 600; %n
     k = round(n/2); %k
     QM = -1; %the question mark value > 0
     inc = 0.05;
-    tryNum = 10; %how many matrixes to generate for a given epsilon
+    tryNum = 1; %how many matrixes to generate for a given epsilon
 
     eps_vec = 0:inc:1;
     total_e_rate = zeros(1,length(eps_vec));
@@ -41,10 +41,11 @@ decoded2 = Iter_Method(H, noised, QM);
         eps_e_rate = 0;
         for i = 1:tryNum
             [ H ] = Generate_LDCP_H( dv, dc, k, n ); %generate a random H matrix
-            for j = 1:tryNum
+            for j = 1:20
                 vec = BECnoise(n, eps, QM); %generate a 0 vec with random noise
                 tic
                 decoded_word = Iter_Method(H, vec, QM);
+                dbstop if error
                 toc;
                 itr_e_rate = mean(abs(decoded_word));
                 H_e_rate = H_e_rate + itr_e_rate;

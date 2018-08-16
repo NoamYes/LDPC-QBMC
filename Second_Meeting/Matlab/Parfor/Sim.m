@@ -29,7 +29,7 @@ decoded2 = Iter_Method(H, noised, QM);
     inc = 0.05;
     tryNum = 10; %how many matrixes to generate for a given epsilon
 
-    eps_vec = 0:inc:1;
+    eps_vec = 0.05:inc:1;
     total_e_rate = zeros(1,length(eps_vec));
     count = 1;
     dv = 3; 
