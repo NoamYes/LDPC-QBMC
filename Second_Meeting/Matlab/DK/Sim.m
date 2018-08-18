@@ -4,11 +4,11 @@ tic
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
-n = 36; %n
+n = 1002; %n
 k = round(n/2); %k
 QM = 2; %the question mark value > 0
 inc = 0.005; %how to increment the epsilon vector
-tryMat = 40; %how many matrixes to generate for a given epsilon
+tryMat = 100; %how many matrixes to generate for a given epsilon
 tryVec = 200; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 
@@ -50,8 +50,8 @@ xlabel('Probablity Of Erasure [{\epsilon}]');
 ylabel('Erasure Rate');
 
 dim = [.65 .15 .3 .15];
-% str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
-%     ", d_{c} = " + dc + ", d_{v} = " + dv;
-% annotation('textbox',dim,'String',str,'FitBoxToText','on');
+str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
+    ", d_{c} = " + dc + ", d_{v} = " + dv;
+annotation('textbox',dim,'String',str,'FitBoxToText','on');
 
 toc;
