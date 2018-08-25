@@ -30,7 +30,7 @@ parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments o
     for i = 1:tryMat %run on the number of matrixes
         for j = 1:tryVec %run on the number of vectors to
             vec = BECnoise(n, eps, QM); %generate a 0 vec with random noise
-            totalNoise(j,i) = iter(H(:,:,i), vec, QM, iterLen); %save the
+            totalNoise(j,i) = iter2(H(:,:,i), vec, QM, iterLen, dc); %save the
             %ratio of the noise after iterations to the total noise matrix
         end
 %         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
@@ -38,7 +38,6 @@ parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments o
     end
     mean_vec(idx) = mean(mean(totalNoise)); %calc the mean of all the noise
     % for a given epsilon
-    tic;
 end
 
 figure(1)
