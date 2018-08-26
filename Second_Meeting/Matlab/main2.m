@@ -4,15 +4,19 @@ tic
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
+<<<<<<< HEAD:Second_Meeting/Matlab/DK2.0/main2.m
 n = 2004; %n
+=======
+n = 4008; %n
+>>>>>>> b3ff908046fc75aaaff4c8d00f5a13cb6592ccc5:Second_Meeting/Matlab/main2.m
 k = round(n/2); %k
 QM = 2; %the question mark value > 0
-inc = 0.05; %how to increment the epsilon vector
+inc = 0.005; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 
-eps_vec = 0:inc:1;
+eps_vec = 0.3:inc:0.5;
 dv = 3; 
 dc = 6;
 
@@ -30,7 +34,7 @@ parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments o
     for i = 1:tryMat %run on the number of matrixes
         for j = 1:tryVec %run on the number of vectors to
             vec = BECnoise(n, eps, QM); %generate a 0 vec with random noise
-            totalNoise(j,i) = iter(H(:,:,i), vec, QM, iterLen); %save the
+            totalNoise(j,i) = iter2(H(:,:,i), vec, QM, iterLen, dc); %save the
             %ratio of the noise after iterations to the total noise matrix
         end
 %         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
@@ -38,7 +42,6 @@ parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments o
     end
     mean_vec(idx) = mean(mean(totalNoise)); %calc the mean of all the noise
     % for a given epsilon
-    tic;
 end
 
 figure(1)
