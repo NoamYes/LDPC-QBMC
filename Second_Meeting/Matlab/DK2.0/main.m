@@ -4,7 +4,7 @@ tic
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
-n = 600; %n
+n = 2004; %n
 k = round(n/2); %k
 QM = 2; %the question mark value > 0
 inc = 0.05; %how to increment the epsilon vector
