@@ -1,13 +1,17 @@
-%% the function gets the Matrix and a var vector full of q-1 values, and log2(q)
-%  the function returns the check2var calculation
+%% the function gets the Matrix of varCheck, H mat, the var vector and QM
+% it checks each variable in each check what is the value of the other vars
+% and if they are all 0, Matrix in that check and var will be 0, else QM.
 
-function [var] = check2var(Mat_t, var, logq)
-
-%     gf_mat = gf(Mat_t,logq); %turns mat to gf mat
-    for i = logq:-1:1
-        
-        [QM_row, ~] = find(~(Mat_t - (2^(i - 1) - 1))); %find values that are 2^(i - 1) - 1
-        var(QM_row) = 2^(i - 1) - 1; %if there are 2^(i - 1) - 1)'s in the col, then put a 2^(i - 1) - 1) in the var
-
+function [Mat_t] = check2var(Mat_t, H_t, var, dc)
+    
+    one_loc = find(~(H_t - 1)); %find the location of ones in H
+    for i = 1:dc
+        dc_loc = one_loc(i:dc:end); %get the one_loc in i mod dc locations
+        H_t(dc_loc) = 0; %put 0's where they should be
+        mat_row = ~(var * H_t);  %find the location of zeros in var * H_t
+        Mat_t(dc_loc(mat_row)) = 0; %put 0 in the var2check matrix
+        H_t(dc_loc) = 1; %put 1s where they used to be
     end
+    
 end
+

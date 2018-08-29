@@ -20,8 +20,8 @@ function [ H ] = Generate_LDCP_H( dv, dc, m, n, q )
         H_new = H1(:,rows_perm_i);
         H = [H; H_new];
     end
-    options = gf(0:q-1,log2(q));
-    perm = randi(q, size(H));
+    options = [1:q-1];
+    perm = randi(q-1, size(H));
     randH = options(perm);
     H = H.*randH;
 end
