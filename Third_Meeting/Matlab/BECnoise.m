@@ -12,4 +12,5 @@ function [output] = BECnoise(n, e_vec) %for size(e_vec) > 1
         erasion_vec(tmp) = 0; %put a 0 in the erasion vec because it now holds a value
         epsilon = epsilon - e_vec(i); %remove the one we used
     end
+    
 end
