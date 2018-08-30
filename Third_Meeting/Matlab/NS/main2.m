@@ -9,12 +9,12 @@ n = 36; %n
 k = round(n/2); %k
 QM = 2; %the question mark value > 0
 inc = 0.005; %how to increment the epsilon vector
-tryMat = 10; %how many matrixes to generate for a given epsilon
+tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
 
-eps_vec = 0.3:inc:0.5;
+eps_vec = 0.9;
 dv = 3; 
 dc = 6;
 
@@ -38,8 +38,8 @@ for idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments of i
         v2c_s.rows = reshape(rv,n,dv);
         v2c_s.cols = reshape(cv,n,dv);
 
-        [non_zeros2] = find(H{i}');
-        [rc,cc,c] = find(H{i}');
+        [non_zeros2] = find(H{i});
+        [rc,cc,c] = find(H{i});
         c2v_s.idxs = reshape(non_zeros2,n-k,dc);
         c2v_s.vals = reshape(c,n-k,dc);
         c2v_s.rows = reshape(rc,n-k,dc);
