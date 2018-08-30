@@ -3,17 +3,22 @@
 % and if they are all 0, Matrix in that check and var will be 0, else QM.
 
 function [c2v] = check2var(H, v2c, v2c_s, c2v_s)
+
     tic
+    
     mat = zeros(size(H));
     mat(v2c_s.idxs) = v2c;
-    c2v = mat(c2v_s.idxs);
+    c2v_tmp = mat(c2v_s.idxs); % map from v2c matrix to c2v matrix
+    masked_mat = repmat(c2v_tmp, [1,1, size(c2v_tmp,2)]);
+    for i = 1:size(c2v_tmp,2)
+        masked_mat(:,i,i) = 0; % mask dc times with 0 vector to take every v2c except v'
+    end 
+    
+    mult = c2v_s.vals; % H cooresponding values to multiply 
+    c2v = mult*masked_mat;
+    
     toc;
     
-
-
-
-
-
 
 
 %     one_loc = find(~(H_t - 1)); %find the location of ones in H

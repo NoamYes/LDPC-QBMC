@@ -25,6 +25,8 @@ for mat = 1:tryMat
     H{mat} = Generate_LDCP_H( dv, dc, k, n, q ); %generate a random H matrix
 end
 
+[lookMat] = lookup(q);
+
 for idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments of inc
     eps = eps_vec(idx);
     totalNoise = zeros(tryVec, tryMat);

@@ -15,7 +15,7 @@ function [NoiseRatio] = iter(H, vec, q, iter_len, dc, v2c_s, c2v_s)
 
     
     for i = 1:iter_len
-        v2c = var2check(H,c2v, v2c_s, c2v_s);
+        v2c = var2check(H,c2v, v2c_s, c2v_s, q);
         c2v = check2var(H, v2c, v2c_s, c2v_s);
 %         if isequal(var, old_var) || ~any(var) %if var didn't change or it 
 %             % the 0 vector, end the iteration
