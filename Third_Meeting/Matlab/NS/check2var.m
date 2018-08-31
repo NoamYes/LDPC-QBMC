@@ -2,7 +2,7 @@
 % it checks each variable in each check what is the value of the other vars
 % and if they are all 0, Matrix in that check and var will be 0, else QM.
 
-function [c2v] = check2var(H, v2c, v2c_s, c2v_s)
+function [c2v] = check2var(H, v2c, v2c_s, c2v_s, lookMat)
 
     tic
     
@@ -15,8 +15,9 @@ function [c2v] = check2var(H, v2c, v2c_s, c2v_s)
     end 
     
     mult = c2v_s.vals; % H cooresponding values to multiply 
-    c2v = mult*masked_mat;
-    
+%     c2v = mult*masked_mat;
+%     [ set ] = sumset( mult, masked_mat(:,:,1) , lookMat);
+        set = bsxfun(@sumset(mult, masked_mat(:,:,1)), lookMat, mult, masked_mat(:,:,1));
     toc;
     
 

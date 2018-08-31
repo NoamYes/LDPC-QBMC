@@ -5,7 +5,7 @@ tic
 % requested
 
 
-n = 36; %n
+n = 12; %n
 k = round(n/2); %k
 QM = 2; %the question mark value > 0
 inc = 0.005; %how to increment the epsilon vector
@@ -50,7 +50,7 @@ for idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments of i
 
         for j = 1:tryVec %run on the number of vectors to
             vec = BECnoise(n, eps); %generate a 0 vec with random noise
-            totalNoise(j,i) = iter(H{i}, vec, q, iterLen, dc, v2c_s, c2v_s); %save the
+            totalNoise(j,i) = iter(H{i}, vec, q, iterLen, dc, v2c_s, c2v_s, lookMat); %save the
             %ratio of the noise after iterations to the total noise matrix
         end
 %         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...

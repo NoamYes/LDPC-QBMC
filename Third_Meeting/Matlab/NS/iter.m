@@ -2,7 +2,7 @@
 % the length of the iterations. it then runs iter_len times the netword
 % iterations (with optimization) and return the noise ratio in the end.
 
-function [NoiseRatio] = iter(H, vec, q, iter_len, dc, v2c_s, c2v_s)
+function [NoiseRatio] = iter(H, vec, q, iter_len, dc, v2c_s, c2v_s, lookMat)
 
 %     [row, col] = size(H);
 %     Mat_t = repmat(vec.',[1,row]); %initiate a matrix like H with all the repeat
@@ -10,13 +10,13 @@ function [NoiseRatio] = iter(H, vec, q, iter_len, dc, v2c_s, c2v_s)
     old_var = vec; %initate the var vector
     H_t = H.';
     init_v2c = vec(v2c_s.cols);
-    c2v = check2var(H,init_v2c, v2c_s, c2v_s);
+    c2v = check2var(H,init_v2c, v2c_s, c2v_s, lookMat);
 %     QM_var = zeros(1,col) + QM; %create a QM var vec with length n
 
     
     for i = 1:iter_len
         v2c = var2check(H,c2v, v2c_s, c2v_s, q);
-        c2v = check2var(H, v2c, v2c_s, c2v_s);
+        c2v = check2var(H, v2c, v2c_s, c2v_s, lookMat);
 %         if isequal(var, old_var) || ~any(var) %if var didn't change or it 
 %             % the 0 vector, end the iteration
 %             break;
