@@ -1,12 +1,18 @@
-function [ set ] = sumset( mult, vec , lookup_mat)
+function [ set ] = sumset( mult, vec , iter, lookMat, divideMat)
 %SUMSET Summary of this function goes here
 %   Detailed explanation goes here
+% logq = size(lookMat,2)-1;
 
-tmp = lookup_mat(mult(1)+1, vec(1)+1, mult(2)+1, vec(2)+1);
+divider = mult(iter);
+multH = divideMat(mult, divider);
+tmp = lookMat(multH(1), log2(vec(1)+1)+1, multH(2), log2(vec(2)+1)+1);
+
 for i=3:length(vec)
     
-%     set = lookup_mat(2, tmp, mult(i)+1, vec(i)+1);
-        set = lookup_mat(1);
+    set = lookMat(1, log2(tmp+1)+1, multH(i), log2(vec(i)+1)+1);
 
 end
+
+end
+
 
