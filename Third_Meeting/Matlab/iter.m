@@ -2,7 +2,7 @@
 % the length of the iterations. it then runs iter_len times the netword
 % iterations (with optimization) and return the noise ratio in the end.
 
-function [NoiseRatio] = iter2(H, vec, iter_len, dc, looktable, dividetable)
+function [NoiseRatio] = iter(H, vec, iter_len, dc, looktable, dividetable)
 
     [row, ~] = size(H);
     Mat_t = repmat(vec.',[1,row]); %initiate a matrix like H with all the repeat
@@ -24,8 +24,10 @@ function [NoiseRatio] = iter2(H, vec, iter_len, dc, looktable, dividetable)
             old_var = var;
         end
 
-        end_noise = sum(var);
-        NoiseRatio = end_noise/start_noise; %return the ratio of noise
+%         end_noise = sum(var);
+%         NoiseRatio = end_noise/start_noise; %return the ratio of noise
+        end_noise = numel(find(var));
+        NoiseRatio = end_noise/numel(var);
     end
     
 end
