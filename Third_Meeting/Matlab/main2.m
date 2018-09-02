@@ -8,13 +8,14 @@ tic
 n = 36; %n
 k = round(n/2); %k
 QM = 2; %the question mark value > 0
-inc = 0.005; %how to increment the epsilon vector
+inc = 0.05; %how to increment the epsilon vector
 tryMat = 10; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
+looktable = lookup(q);
 
-eps_vec = 0.3:inc:0.5;
+eps_vec = 0:inc:1;
 dv = 3; 
 dc = 6;
 
@@ -25,14 +26,14 @@ for mat = 1:tryMat
     H{mat} = Generate_LDCP_H( dv, dc, k, n, q ); %generate a random H matrix
 end
 
-for idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments of inc
+parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments of inc
     eps = eps_vec(idx);
     totalNoise = zeros(tryVec, tryMat);
     mean_mat = zeros(1, tryMat);
     for i = 1:tryMat %run on the number of matrixes
         for j = 1:tryVec %run on the number of vectors to
-            vec = BECnoise(n, eps, QM); %generate a 0 vec with random noise
-            totalNoise(j,i) = iter2(H{i}, vec, QM, iterLen, dc); %save the
+            vec = BECnoise(n, [eps, 0.1]); %generate a 0 vec with random noise
+            totalNoise(j,i) = iter2(H{i}, vec, iterLen, dc, looktable); %save the
             %ratio of the noise after iterations to the total noise matrix
         end
 %         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
