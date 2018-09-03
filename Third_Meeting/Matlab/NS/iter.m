@@ -4,19 +4,20 @@
 
 function [NoiseRatio] = iter(H, vec, q, iter_len, dc, v2c_s, c2v_s, lookMat, divideMat)
 
-%     [row, col] = size(H);
-%     Mat_t = repmat(vec.',[1,row]); %initiate a matrix like H with all the repeat
-%     %of the vector vec.' (for performance)
+
     old_var = vec; %initate the var vector
     H_t = H.';
-    init_v2c = vec(v2c_s.cols);
+    init_c2v = vec(c2v_s.rows);
+    mat = zeros(size(H));
+    mat(c2v_s.idxs) = init_c2v;
+    init_v2c = mat(v2c_s.idxs);
     c2v = check2var(H,init_v2c, v2c_s, c2v_s, lookMat, divideMat);
-%     QM_var = zeros(1,col) + QM; %create a QM var vec with length n
-
     
     for i = 1:iter_len
-        v2c = var2check(H,c2v, v2c_s, c2v_s, q);
+        v2c = var2check(H,c2v, v2c_s, c2v_s, q, init_v2c);
+        tic
         c2v = check2var(H, v2c, v2c_s, c2v_s, lookMat, divideMat);
+        toc
         decoded = min(v2c, [], 2);
          if isequal(decoded, old_var) || ~any(decoded) %if var didn't change or it 
              % the 0 vector, end the iteration

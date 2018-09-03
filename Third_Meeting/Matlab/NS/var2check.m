@@ -1,7 +1,7 @@
 %% the function gets the Matrix and a var vector full of q-1 values, and log2(q)
 %  the function returns the check2var calculation
 
-function [v2c] = var2check(H,c2v, v2c_s, c2v_s,q)
+function [v2c] = var2check(H,c2v, v2c_s, c2v_s,q, init_v2c)
 
     mat = zeros(size(H)); 
     mat(c2v_s.idxs) = c2v; % map from c2v matrix to v2c matrix
@@ -10,10 +10,9 @@ function [v2c] = var2check(H,c2v, v2c_s, c2v_s,q)
     for i = 1:size(v2c_tmp,2)
         masked_mat(:,i,i) = q; % mask dv times with q vector to take every c2v except c'
     end
-    tic
     v2c = min(masked_mat,[],2); % the minimum is the intersection
-    toc;
     v2c = squeeze(v2c);
+    v2c = min(v2c, init_v2c);
 
 
 end

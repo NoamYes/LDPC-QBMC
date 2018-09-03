@@ -9,9 +9,7 @@ sum_set = @(i,j) sumset(A(i,:),B(j,:));
 n = size(A,1);
 % C = arrayfun(sum_set, 1:n, 1:n);
 
+a = ones(1e3);
 tic
-3/4
-toc;
-tic
-gf(3,3)/gf(4,3)
-toc;
+b = gpuArray(a);
+toc
