@@ -15,9 +15,9 @@ function [NoiseRatio] = iter(H, vec, q, iter_len, dc, v2c_s, c2v_s, lookMat, div
     
     for i = 1:iter_len
         v2c = var2check(H,c2v, v2c_s, c2v_s, q, init_v2c);
-        tic
+%         tic
         c2v = check2var(H, v2c, v2c_s, c2v_s, lookMat, divideMat);
-        toc
+%         toc
         decoded = min(v2c, [], 2);
          if isequal(decoded, old_var) || ~any(decoded) %if var didn't change or it 
              % the 0 vector, end the iteration
@@ -27,8 +27,11 @@ function [NoiseRatio] = iter(H, vec, q, iter_len, dc, v2c_s, c2v_s, lookMat, div
     end
     
     decoded = min(v2c, [], 2);
-    end_noise = sum(decoded(:));
-    NoiseRatio = end_noise/sum(old_var); %return the ratio of noise
+%     end_noise = sum(decoded(:));
+%     NoiseRatio = end_noise/sum(old_var); %return the ratio of noise
+    end_noise = sum(decoded(:) ~= 0);
+    NoiseRatio = end_noise/length(old_var); %return the ratio of noise
+
     
 end
 

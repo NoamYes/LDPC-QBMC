@@ -7,7 +7,7 @@ tic
 
 n = 36; %n
 k = round(n/2); %k
-inc = 0.05; %how to increment the epsilon vector
+inc = 0.0025; %how to increment the epsilon vector
 tryMat = 20; %how many matrixes to generate for a given epsilon
 tryVec = 200; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
@@ -15,8 +15,8 @@ q=4;
 looktable = lookup(q);
 dividetable = divide(q);
 
-e1_vec = 0:inc:1;
-e2_vec = 0:inc:1;
+e1_vec = 0:inc:0.5;
+e2_vec = 0:inc:0.5;
 dv = 3; 
 dc = 6;
 
@@ -46,7 +46,15 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
     end
 end
 figure(1)
-imshow(mean_mat);
+RI = imref2d(size(mean_mat));
+RI.XWorldLimits = [e1_vec(1) e1_vec(end)];
+RI.YWorldLimits = [e2_vec(1) e2_vec(end)];
+imshow(mean_mat, RI);
+truesize([300 200]);
+xlabel('one bits Erasure [{\epsilon1}]');
+ylabel('two bits Erasure [{\epsilon2}]');
+title('total erasure rate, q=4  ');
+
 % figure(1)
 % plot(eps_vec,mean_mat); hold on
 % plot(eps_vec,eps_vec);
