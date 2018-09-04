@@ -5,18 +5,18 @@ tic
 % requested
 
 
-n = 36; %n
+n = 600; %n
 k = round(n/2); %k
-inc = 0.0025; %how to increment the epsilon vector
-tryMat = 20; %how many matrixes to generate for a given epsilon
-tryVec = 200; %how many noise vector to test each time
+inc = 0.05; %how to increment the epsilon vector
+tryMat = 1; %how many matrixes to generate for a given epsilon
+tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
 looktable = lookup(q);
 dividetable = divide(q);
 
-e1_vec = 0:inc:0.5;
-e2_vec = 0:inc:0.5;
+e1_vec = 0:inc:1;
+e2_vec = 0:inc:1;
 dv = 3; 
 dc = 6;
 
@@ -31,18 +31,22 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
     e1 = e1_vec(idx);
     parfor jdx = 1:numel(e2_vec)
         e2 = e2_vec(jdx);
-        totalNoise = zeros(tryVec, tryMat);
-        for i = 1:tryMat %run on the number of matrixes
-            for j = 1:tryVec %run on the number of vectors to
-                vec = BECnoise(n, [e1, e2]); %generate a 0 vec with random noise
-                totalNoise(j,i) = iter(H{i}, vec, iterLen, dc, looktable, dividetable); %save the
-                %ratio of the noise after iterations to the total noise matrix
+        if e1 + e2 > 1
+            mean_mat(idx,jdx) = 1;
+        else
+            totalNoise = zeros(tryVec, tryMat);
+            for i = 1:tryMat %run on the number of matrixes
+                for j = 1:tryVec %run on the number of vectors to
+                    vec = BECnoise(n, [e1, e2]); %generate a 0 vec with random noise
+                    totalNoise(j,i) = iter(H{i}, vec, iterLen, dc, looktable, dividetable); %save the
+                    %ratio of the noise after iterations to the total noise matrix
+                end
+        %         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
+        %             round(toc,1)+" (sec)");
             end
-    %         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
-    %             round(toc,1)+" (sec)");
+            mean_mat(idx,jdx) = mean(mean(totalNoise)); %calc the mean of all the noise
+            % for a given epsilon
         end
-        mean_mat(idx,jdx) = mean(mean(totalNoise)); %calc the mean of all the noise
-        % for a given epsilon
     end
 end
 figure(1)
@@ -51,9 +55,10 @@ RI.XWorldLimits = [e1_vec(1) e1_vec(end)];
 RI.YWorldLimits = [e2_vec(1) e2_vec(end)];
 imshow(mean_mat, RI);
 truesize([300 200]);
-xlabel('one bits Erasure [{\epsilon1}]');
-ylabel('two bits Erasure [{\epsilon2}]');
-title('total erasure rate, q=4  ');
+xlabel('two bits Erasure [\epsilon_{2}]');
+ylabel('one bits Erasure [\epsilon_{1}]');
+str_title = "total erasure rate for q = " + q;
+title(str_title);
 
 % figure(1)
 % plot(eps_vec,mean_mat); hold on
