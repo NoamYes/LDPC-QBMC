@@ -1,4 +1,4 @@
-function [out_vec] = sum_lookup(looktable, H_t, var_vec, dc, dividetable, hv_vec)
+function [out_vec] = sum_lookup(H_t, var_vec, dc, looktable, dividetable, hv_vec)
     
     [~, size_c] = size(H_t);
     out_vec = zeros(1, size_c);

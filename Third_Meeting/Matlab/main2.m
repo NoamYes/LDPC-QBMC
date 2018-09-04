@@ -5,7 +5,7 @@ tic
 % requested
 
 
-n = 36; %n
+n = 2004; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
@@ -41,13 +41,12 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
                     totalNoise(j,i) = iter(H{i}, vec, iterLen, dc, looktable, dividetable); %save the
                     %ratio of the noise after iterations to the total noise matrix
                 end
-        %         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
-        %             round(toc,1)+" (sec)");
             end
             mean_mat(idx,jdx) = mean(mean(totalNoise)); %calc the mean of all the noise
             % for a given epsilon
         end
     end
+    disp(round(idx*inc*100,1)+"% done in "+round(toc,1)+" (sec)");
 end
 figure(1)
 imshow(mean_mat, 'XData', e1_vec, 'YData', e2_vec);

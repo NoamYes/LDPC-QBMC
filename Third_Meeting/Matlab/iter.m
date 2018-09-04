@@ -10,18 +10,18 @@ function [NoiseRatio] = iter(H, vec, iter_len, dc, looktable, dividetable)
     old_var = vec; %initate the var vector
     H_t = H.';
     
-        for i = 1:iter_len
-            Mat_t = check2var(Mat_t, H_t, old_var, dc, looktable, dividetable);
-            var = var2check(Mat_t);
-            if isequal(var, old_var) || ~any(var) %if var didn't change or it 
-                % the 0 vector, end the iteration
-                break;
-            end
-            old_var = var;
+    for i = 1:iter_len
+        Mat_t = check2var(Mat_t, H_t, old_var, dc, looktable, dividetable);
+        var = var2check(Mat_t);
+        if isequal(var, old_var) || ~any(var) %if var didn't change or it 
+            % the 0 vector, end the iteration
+            break;
         end
-        
-        end_noise = numel(find(var));
-        NoiseRatio = end_noise/numel(var);
+        old_var = var;
+    end
+
+    end_noise = numel(find(var));
+    NoiseRatio = end_noise/numel(var);
     
 end
 

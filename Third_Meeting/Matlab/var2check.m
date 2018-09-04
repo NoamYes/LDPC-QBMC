@@ -3,6 +3,6 @@
 
 function [var] = var2check(Mat_t)
 
-    var = min(Mat_t.');
+    var = min(Mat_t,[],2);
     
 end

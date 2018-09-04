@@ -9,7 +9,7 @@ function [Mat_t] = check2var(Mat_t, H_t, var, dc, looktable, dividetable)
         dc_loc = not_zero(i:dc:end); %get the one_loc in i mod dc locations
         hv_vec = H_t(dc_loc);
         H_t(dc_loc) = 0; %put 0's where they should be for this iter
-        Mat_t(dc_loc) = sum_lookup(looktable, H_t, var, dc, dividetable, hv_vec);
+        Mat_t(dc_loc) = sum_lookup(H_t, var, dc, looktable, dividetable, hv_vec);
         H_t(dc_loc) = hv_vec; %put the vec where they used to be
     end
     
