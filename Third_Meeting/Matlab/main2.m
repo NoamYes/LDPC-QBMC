@@ -5,7 +5,7 @@ tic
 % requested
 
 
-n = 600; %n
+n = 36; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
@@ -50,27 +50,15 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
     end
 end
 figure(1)
-RI = imref2d(size(mean_mat));
-RI.XWorldLimits = [e1_vec(1) e1_vec(end)];
-RI.YWorldLimits = [e2_vec(1) e2_vec(end)];
-imshow(mean_mat, RI);
+imshow(mean_mat, 'XData', e1_vec, 'YData', e2_vec);
+axis on;
+view(-90,90)
 truesize([300 200]);
 xlabel('two bits Erasure [\epsilon_{2}]');
 ylabel('one bits Erasure [\epsilon_{1}]');
 str_title = "total erasure rate for q = " + q;
 title(str_title);
-
-% figure(1)
-% plot(eps_vec,mean_mat); hold on
-% plot(eps_vec,eps_vec);
-% title('Ratio of erasures after decoding with random noise VS erasure probablity');
-% legend('Erasure','y=x')
-% xlabel('Probablity Of Erasure [{\epsilon}]');
-% ylabel('Erasure Rate');
-% 
-% dim = [.65 .15 .3 .15];
 % str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
 %     ", d_{c} = " + dc + ", d_{v} = " + dv;
-% annotation('textbox',dim,'String',str,'FitBoxToText','on');
 
 toc;
