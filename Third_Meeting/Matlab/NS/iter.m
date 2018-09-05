@@ -27,10 +27,10 @@ function [NoiseRatio] = iter(H, vec, q, iter_len, dc, v2c_s, c2v_s, lookMat, div
     end
     
     decoded = min(v2c, [], 2);
-%     end_noise = sum(decoded(:));
-%     NoiseRatio = end_noise/sum(old_var); %return the ratio of noise
-    end_noise = sum(decoded(:) ~= 0);
-    NoiseRatio = end_noise/length(old_var); %return the ratio of noise
+    end_noise = sum(decoded(:));
+    NoiseRatio = end_noise/sum(old_var); %return the ratio of noise
+%     end_noise = sum(decoded(:) ~= 0);
+%     NoiseRatio = end_noise/length(old_var); %return the ratio of noise
 
     
 end

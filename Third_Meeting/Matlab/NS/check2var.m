@@ -23,7 +23,8 @@ for i = 1:size(c2v_tmp,2)
     reped(RowsMax,i) = Max;
     NotMax = find(reped(:,i) ~= Max);
     if(~isempty(NotMax))
-        for s = NotMax 
+        for idx = 1:numel(NotMax) 
+            s = NotMax(idx);
             reped(s,i) = sumset(mult(s,:),masked_mat(s,:), i, lookMat, divideMat);
         end
     end
