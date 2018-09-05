@@ -1,11 +1,11 @@
 clc; clear all; close all;
-tic
+
 %%
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
 
-n = 2004; %n
+n = 300; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
@@ -23,10 +23,11 @@ dc = 6;
 H = cell(1,tryMat);
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
 
-for mat = 1:tryMat
-    H{mat} = Generate_LDCP_H( dv, dc, k, n, q ); %generate a random H matrix
+for mat_iter = 1:tryMat
+    H{mat_iter} = Generate_LDCP_H( dv, dc, k, n, q ); %generate a random H matrix
 end
 
+tic
 for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of inc
     e1 = e1_vec(idx);
     parfor jdx = 1:numel(e2_vec)
@@ -35,10 +36,10 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
             mean_mat(idx,jdx) = 1;
         else
             totalNoise = zeros(tryVec, tryMat);
-            for i = 1:tryMat %run on the number of matrixes
-                for j = 1:tryVec %run on the number of vectors to
+            for mat_iter = 1:tryMat %run on the number of matrixes
+                for vec_iter = 1:tryVec %run on the number of vectors to
                     vec = BECnoise(n, [e1, e2]); %generate a 0 vec with random noise
-                    totalNoise(j,i) = iter(H{i}, vec, iterLen, dc, looktable, dividetable); %save the
+                    totalNoise(vec_iter,mat_iter) = iter(H{mat_iter}, vec, iterLen, dc, looktable, dividetable); %save the
                     %ratio of the noise after iterations to the total noise matrix
                 end
             end
@@ -53,8 +54,8 @@ imshow(mean_mat, 'XData', e1_vec, 'YData', e2_vec);
 axis on;
 view(-90,90)
 truesize([300 200]);
-xlabel('two bits Erasure [\epsilon_{2}]');
-ylabel('one bits Erasure [\epsilon_{1}]');
+xlabel('one bits Erasure [\epsilon_{1}]');
+ylabel('two bits Erasure [\epsilon_{2}]');
 str_title = "total erasure rate for q = " + q;
 title(str_title);
 % str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
