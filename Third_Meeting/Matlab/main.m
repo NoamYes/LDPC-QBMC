@@ -47,7 +47,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
             % for a given epsilon
         end
     end
-    disp(round(idx*inc*100,1)+"% done in "+round(toc,1)+" (sec)");
+    disp(round(idx/numel(e1_vec)*100,1)+"% done in "+round(toc,1)+" (sec)");
 end
 figure(1)
 imshow(mean_mat, 'XData', e1_vec, 'YData', e2_vec);
