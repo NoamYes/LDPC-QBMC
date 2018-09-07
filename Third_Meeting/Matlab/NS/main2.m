@@ -9,10 +9,10 @@ n = 600; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
-tryVec = 100; %how many noise vector to test each time
+tryVec = 20; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
-looktable = lookup(q);
+looktable = look_up(q);
 dividetable = divide(q);
 
 e1_vec = 0:inc:1;
@@ -67,7 +67,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
         % for a given epsilon
     end
     
-    disp(round(idx*inc*100,1)+"% done in "+round(toc,1)+" (sec)");
+%     disp(round(idx*inc*100,1)+"% done in "+round(toc,1)+" (sec)");
    
 end
 
@@ -78,17 +78,18 @@ view(-90,90)
 truesize([300 200]);
 xlabel('two bits Erasure [\epsilon_{2}]');
 ylabel('one bits Erasure [\epsilon_{1}]');
-str_title = "total erasure rate for q = " + q;
-title(str_title);
+% str_title = "total erasure rate for q = " + q;
+% title(str_title);
 
-% figure(1)
-% plot(eps_vec,mean_mat); hold on
-% plot(eps_vec,eps_vec);
-% title('Ratio of erasures after decoding with random noise VS erasure probablity');
-% legend('Erasure','y=x')
-% xlabel('Probablity Of Erasure [{\epsilon}]');
-% ylabel('Erasure Rate');
-% 
+
+figure(2)
+plot(e1_vec,mean_mat(1,:)); hold on
+plot(e1_vec,e1_vec);
+title('Ratio of erasures after decoding with random noise VS erasure probablity');
+legend('Erasure','y=x')
+xlabel('Probablity Of Erasure [{\epsilon}]');
+ylabel('Erasure Rate');
+
 % dim = [.65 .15 .3 .15];
 % str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
 %     ", d_{c} = " + dc + ", d_{v} = " + dv;

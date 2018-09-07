@@ -4,7 +4,7 @@
 % the set (0) is 0, (0,1) is 1, (0,1,2,3) is 3 and so on) [j+1 and h+1, the
 % reason for +1 is since 0 is a valid number but matlab matrix starts at 1.
 
-function [lookMat] = lookup(q) 
+function [lookMat] = look_up(q) 
     logq = log2(q);
     lookMat = zeros(q-1, logq, q-1, logq);
     for i = 1:q-1 %run on all the consts
