@@ -6,7 +6,7 @@
 % 1. 
 % so it returns - 
 
-function [lookMat] = lookup(q) 
+function [lookMat] = look_up(q) 
     logq = log2(q);
     lookMat = zeros(q-1, logq, q-1, logq);
     for i = 1:q-1 %run on all the consts

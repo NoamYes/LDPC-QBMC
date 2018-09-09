@@ -5,7 +5,7 @@ tic
 % requested
 
 
-n = 600; %n
+n = 36; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
@@ -15,7 +15,7 @@ q=4;
 looktable = look_up(q);
 dividetable = divide(q);
 
-e1_vec = 0:inc:1;
+e1_vec = 0.4:inc:1;
 e2_vec = 0:inc:1;
 dv = 3; 
 dc = 6;
@@ -49,7 +49,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
         c2v_s.idxs  = sub2ind(size(H{i}), c2v_s.cols, c2v_s.rows);%% the function gets the Matrix and the QM as input and creates a vector of
 %  var so the if there is a 0 in the row, it will be a 0 and if not, a QM.
 
-            parfor j = 1:tryVec %run on the number of vectors to
+            for j = 1:tryVec %run on the number of vectors to
                 vec = BECnoise(n, [e1, e2]); %generate a 0 vec with random noise
 %                 tic
                 if e1 + e2 > 1
