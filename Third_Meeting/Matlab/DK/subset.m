@@ -6,17 +6,20 @@
 % 1. 
 % so it returns - 
 
-function [lookMat] = lookup(q, subCell) 
+function [subCell] = subset(q) 
     logq = log2(q);
-    subLen = numel(subCell);
-    lookMat = zeros(q-1, subLen, q-1, subLen);
+    subCell = {};
+    for t =0:logq
+        subCell{t+1} = uint32(0:2^t-1);
+    end
+    sub_idx = logq+1;
     for i = 1:q-1 %run on all the consts
-        for j = 1:subLen %run on all the sets
+        for j = 0:logq %run on all the sets
             for k = 1:q-1 %run on all the consts
-                for h = 1:subLen %run on all the sets
+                for h = 0:logq %run on all the sets
                     res = [];
-                    for m = subCell{j} %run on all the options for set j
-                        for n = subCell{h} %run on all the options for set h
+                    for m = 0:2^j-1 %run on all the options for set j
+                        for n = 0:2^h-1 %run on all the options for set h
                             res = [res, gf(i, logq) * gf(m, logq) + ...
                                 gf(k, logq) * gf(n, logq)];
                             % calc all the possible solutions for the
@@ -25,11 +28,10 @@ function [lookMat] = lookup(q, subCell)
                     end
                     group = unique(res.x);
                     isSub = cellfun(@(x)isequal(x,group),subCell);
-                    loc = find(isSub);
-                    lookMat(i,j,k,h) = loc;
-                    % find
-                    % how many different results res has and remove 1 to get
-                    % the correct format for the int "set"
+                    if isempty(find(isSub, 1)) %if group is not in subCell
+                        sub_idx = sub_idx + 1;
+                        subCell{sub_idx} = group;
+                    end
                 end
             end
         end

@@ -4,11 +4,11 @@ tic
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
-n = 600; %n
+n = 300; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
-tryVec = 100; %how many noise vector to test each time
+tryVec = 20; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 
 q=4;
@@ -32,7 +32,7 @@ parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments o
     mean_mat = zeros(1, tryMat);
     for i = 1:tryMat %run on the number of matrixes
         for j = 1:tryVec %run on the number of vectors to
-            vec = BECnoise(n, eps); %generate a 0 vec with random noise
+            vec = BECnoise(n, [eps,0,0,0]); %generate a 0 vec with random noise
             totalNoise(j,i) = iter(H(:,:,i),  vec, iterLen, dc, looktable, dividetable); %save the
             %ratio of the noise after iterations to the total noise matrix
         end
