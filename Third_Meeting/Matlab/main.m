@@ -5,7 +5,7 @@ clc; clear all; close all;
 % requested
 
 
-n = 300; %n
+n = 12; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
