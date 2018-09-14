@@ -6,11 +6,8 @@
 % 1. 
 % so it returns - 
 
-<<<<<<< HEAD:Third_Meeting/Matlab/DK/lookup.m
 function [lookMat] = lookup(q, subCell) 
-=======
-function [lookMat] = look_up(q) 
->>>>>>> e1d973529178880ae37f18abc75c714270034ac6:Third_Meeting/Matlab/DK/look_up.m
+
     logq = log2(q);
     subLen = numel(subCell);
     lookMat = zeros(q-1, subLen, q-1, subLen);
