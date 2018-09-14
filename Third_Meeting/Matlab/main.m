@@ -12,7 +12,7 @@ tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
-looktable = lookup(q);
+looktable = look_up(q);
 dividetable = divide(q);
 
 e1_vec = 0:inc:1;

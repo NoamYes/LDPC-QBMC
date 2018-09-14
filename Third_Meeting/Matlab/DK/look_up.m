@@ -6,23 +6,32 @@
 % 1. 
 % so it returns - 
 
-function [lookMat] = lookup(q) 
+<<<<<<< HEAD:Third_Meeting/Matlab/DK/lookup.m
+function [lookMat] = lookup(q, subCell) 
+=======
+function [lookMat] = look_up(q) 
+>>>>>>> e1d973529178880ae37f18abc75c714270034ac6:Third_Meeting/Matlab/DK/look_up.m
     logq = log2(q);
-    lookMat = zeros(q-1, logq, q-1, logq);
+    subLen = numel(subCell);
+    lookMat = zeros(q-1, subLen, q-1, subLen);
     for i = 1:q-1 %run on all the consts
-        for j = 0:logq %run on all the sets
+        for j = 1:subLen %run on all the sets
             for k = 1:q-1 %run on all the consts
-                for h = 0:logq %run on all the sets
+                for h = 1:subLen %run on all the sets
                     res = [];
-                    for m = 0:2^j-1 %run on all the options for set j
-                        for n = 0:2^h-1 %run on all the options for set h
+                    for m = subCell{j} %run on all the options for set j
+                        for n = subCell{h} %run on all the options for set h
                             res = [res, gf(i, logq) * gf(m, logq) + ...
                                 gf(k, logq) * gf(n, logq)];
                             % calc all the possible solutions for the
                             % equation.
                         end
                     end
-                    lookMat(i,j+1,k,h+1) = numel(unique(res.x)) - 1; % find
+                    group = unique(res.x);
+                    isSub = cellfun(@(x)isequal(x,group),subCell);
+                    loc = find(isSub);
+                    lookMat(i,j,k,h) = loc;
+                    % find
                     % how many different results res has and remove 1 to get
                     % the correct format for the int "set"
                 end

@@ -6,28 +6,23 @@
 % 1. 
 % so it returns - 
 
-function [lookMat] = lookup(q, subCell) 
+function [lookMat] = look_up(q) 
     logq = log2(q);
-    subLen = numel(subCell);
-    lookMat = zeros(q-1, subLen, q-1, subLen);
+    lookMat = zeros(q-1, logq, q-1, logq);
     for i = 1:q-1 %run on all the consts
-        for j = 1:subLen %run on all the sets
+        for j = 0:logq %run on all the sets
             for k = 1:q-1 %run on all the consts
-                for h = 1:subLen %run on all the sets
+                for h = 0:logq %run on all the sets
                     res = [];
-                    for m = subCell{j} %run on all the options for set j
-                        for n = subCell{h} %run on all the options for set h
+                    for m = 0:2^j-1 %run on all the options for set j
+                        for n = 0:2^h-1 %run on all the options for set h
                             res = [res, gf(i, logq) * gf(m, logq) + ...
                                 gf(k, logq) * gf(n, logq)];
                             % calc all the possible solutions for the
                             % equation.
                         end
                     end
-                    group = unique(res.x);
-                    isSub = cellfun(@(x)isequal(x,group),subCell);
-                    loc = find(isSub);
-                    lookMat(i,j,k,h) = loc;
-                    % find
+                    lookMat(i,j+1,k,h+1) = numel(unique(res.x)) - 1; % find
                     % how many different results res has and remove 1 to get
                     % the correct format for the int "set"
                 end
