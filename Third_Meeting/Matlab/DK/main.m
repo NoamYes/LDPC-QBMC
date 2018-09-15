@@ -9,7 +9,7 @@ n = 1002; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
-tryVec = 1; %how many noise vector to test each time
+tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
 subsetTable = subset(q);
@@ -52,7 +52,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
     disp(round(idx/numel(e1_vec)*100,1)+"% done in "+round(toc,1)+" (sec)");
 end
 figure(1)
-imshow(mean_mat, 'XData', e1_vec, 'YData', e2_vec);
+imshow(mean_mat.', 'XData', e2_vec, 'YData', e1_vec);
 axis on;
 view(-90,90)
 truesize([300 200]);
