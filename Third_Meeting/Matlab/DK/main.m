@@ -9,7 +9,7 @@ n = 1002; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
-tryVec = 100; %how many noise vector to test each time
+tryVec = 1; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
 subsetTable = subset(q);
@@ -32,7 +32,7 @@ end
 tic
 for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of inc
     e1 = e1_vec(idx);
-    for jdx = 1:numel(e2_vec)
+    parfor jdx = 1:numel(e2_vec)
         e2 = e2_vec(jdx);
         if e1 + e2 > 1
             mean_mat(idx,jdx) = 1;
@@ -41,7 +41,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
             for mat_iter = 1:tryMat %run on the number of matrixes
                 for vec_iter = 1:tryVec %run on the number of vectors to
                     vec = BECnoise(n, [e1, e2]); %generate a 0 vec with random noise
-                    totalNoise(vec_iter,mat_iter) = iter(H{mat_iter}, vec, iterLen, dc, looktable, dividetable, subsetTable, q); %save the
+                    totalNoise(vec_iter,mat_iter) = iter(H{mat_iter}, vec, iterLen, dc, looktable, dividetable, subsetTable, q, intersectTable); %save the
                     %ratio of the noise after iterations to the total noise matrix
                 end
             end
