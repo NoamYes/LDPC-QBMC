@@ -15,6 +15,7 @@ q=4;
 subsetTable = subset(q);
 looktable = lookup(q, subsetTable);
 dividetable = divide(q);
+intersectTable = intersect_lookup(subsetTable);
 
 e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
