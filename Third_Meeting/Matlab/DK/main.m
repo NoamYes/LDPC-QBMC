@@ -41,7 +41,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
             for mat_iter = 1:tryMat %run on the number of matrixes
                 for vec_iter = 1:tryVec %run on the number of vectors to
                     vec = BECnoise(n, [e1, e2]); %generate a 0 vec with random noise
-                    totalNoise(vec_iter,mat_iter) = iter(H{mat_iter}, vec, iterLen, dc, looktable, dividetable, subsetTable, q, intersectTable); %save the
+                    totalNoise(vec_iter,mat_iter) = iter(H{mat_iter}, vec, iterLen, dc, looktable, dividetable, q, intersectTable); %save the
                     %ratio of the noise after iterations to the total noise matrix
                 end
             end
