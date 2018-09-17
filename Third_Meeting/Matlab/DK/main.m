@@ -13,7 +13,7 @@ tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
 subsetTable = subset(q);
-looktable = lookup(q, subsetTable);
+looktable = look_up(q, subsetTable);
 dividetable = divide(q);
 intersectTable = intersect_lookup(subsetTable);
 

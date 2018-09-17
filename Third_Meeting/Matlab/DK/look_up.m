@@ -6,7 +6,7 @@
 % 1. 
 % so it returns - 
 
-function [lookMat] = lookup(q, subCell) 
+function [lookMat] = look_up(q, subCell) 
 
     logq = log2(q);
     subLen = numel(subCell);
