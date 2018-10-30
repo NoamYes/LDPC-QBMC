@@ -1,7 +1,7 @@
-function [out_set] = five2one(subArr, constArr, dc)
+function [out_set] = five2one(subArr, constArr, dc, looktable, dividetable)
 %FIVE2ONE Summary of this function goes here
 %   Detailed explanation goes here
-    outset = 1;
+    out_set = 1;
     for jdx = 1:dc - 1 %run on all the other variables (v_i) in the row
             out_set = looktable(1, ...
                 out_set, ...

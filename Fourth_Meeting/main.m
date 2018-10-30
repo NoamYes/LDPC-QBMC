@@ -13,6 +13,7 @@ tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
 subsetTable = subset(q);
+t = length(subsetTable);
 looktable = look_up(q, subsetTable);
 dividetable = divide(q);
 intersectTable = intersect_lookup(subsetTable);
@@ -21,6 +22,8 @@ e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
 dv = 3; 
 dc = 6;
+L_vec = [1/3 1/3 1/3];
+PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
 
 H = cell(1,tryMat);
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
