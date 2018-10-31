@@ -22,7 +22,7 @@ e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
 dv = 3; 
 dc = 6;
-L_vec = [1/3 1/3 1/3];
+L_vec = [0 1/2 1/2];
 PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
 
 H = cell(1,tryMat);
