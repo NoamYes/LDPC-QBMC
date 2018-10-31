@@ -1,4 +1,4 @@
-function [out_set] = five2one(subArr, constArr, dc)
+function [out_set] = five2one(subArr, constArr, dc, looktable, dividetable)
 %FIVE2ONE 
 % |subArr| = dc - 1
 % |constArr| = dc

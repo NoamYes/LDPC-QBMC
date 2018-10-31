@@ -1,18 +1,36 @@
-function [PiMat] = Pi(subCell, q, L_vec, dc) 
-    t = length(subCell);
-    set_vec = t*ones(1, dc-1);
-    const_vec = (q-1)*ones(1, dc);
-    L_Hist = zeros(const_vec);
-    for idx_hist = const_vec
-%         L_Hist(idx_hist) = L_vec[const_vec]
-    end
+function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable) 
 
-    %piMat_i = zeros(set_vec)
-    %constMat = zeros(const_vec)
-    for idx_vec = set_vec
-        for idx_const = const_vec
-            piMat_i(idx_vec, five2one) = P_L_vec(idx_const);
-        end
-    end
+    set_vec = t*ones(1, dc-1);
+    pi_vec = t*ones(1, dc);
+    const_vec = (q-1)*ones(1, dc);
     
+    probMat = probMatrix(q, dc, L_vec);
+    set_mat = zeros(set_vec);
+    
+    vec_ndims = ndims(set_mat);
+    vec_mat_size = size(set_mat);
+    const_ndims = ndims(probMat);
+    const_mat_size = size(probMat);
+    
+    PiMat = zeros(pi_vec);
+
+    
+    for idx_vec = 1:numel(set_mat)
+        tic
+        I = cell(1, vec_ndims); 
+        [I{:}] = ind2sub(vec_mat_size,idx_vec);
+        sub_idx_vec = cell2mat(I);
+        
+        set_hist = zeros(1, t);
+        for idx_const = 1:numel(probMat)
+            J = cell(1, const_ndims); 
+            [J{:}] = ind2sub(const_mat_size,idx_const);
+            sub_idx_const = cell2mat(J);
+            
+            result = five2one(sub_idx_vec, sub_idx_const, dc, looktable, dividetable);
+            set_hist(result) = set_hist(result) + probMat(idx_const);
+        end
+        PiMat(sub_idx_vec) = set_hist;
+        toc;
+    end
 end
