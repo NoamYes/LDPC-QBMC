@@ -1,5 +1,7 @@
 function [out_vec] = sum_lookup(H_t, var_vec, dc, looktable, dividetable, hv_vec)
-    
+    %
+    % USE IND2SUB
+    %
     [~, size_c] = size(H_t);
     out_vec = zeros(1, size_c) + 1;  %create a 'zero' vector 
     [row, ~] = find(H_t); %find the location of not 0 in H_t
