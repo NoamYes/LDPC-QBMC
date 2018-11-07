@@ -12,17 +12,19 @@ tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
-subsetTable = subset(q);
+
+% subsetTable = subset(q);
+% looktable = look_up(q, subsetTable);
+% dividetable = divide(q);
+% intersectTable = intersect_lookup(subsetTable);
+load('q=8_lookups.mat');
 t = length(subsetTable);
-looktable = look_up(q, subsetTable);
-dividetable = divide(q);
-intersectTable = intersect_lookup(subsetTable);
 
 e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
 dv = 3; 
 dc = 6;
-L_vec = [0 1/2 1/2];
+L_vec = (1/3)*ones(1,3);
 PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
 
 H = cell(1,tryMat);
