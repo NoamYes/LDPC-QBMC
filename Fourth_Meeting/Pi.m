@@ -1,5 +1,6 @@
 function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable) 
-
+    % PiMat is a t matrix of dimension dc (aka t x t x t dc times)
+    % 
     set_vec = t*ones(1, dc-1);
     pi_vec = t*ones(1, dc);
     const_vec = (q-1)*ones(1, dc);
@@ -12,7 +13,7 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
     const_ndims = ndims(probMat);
     const_mat_size = size(probMat);
     
-    PiMat = zeros(pi_vec);
+    PiMat = cell(set_vec);
 
     
     for idx_vec = 1:numel(set_mat)
@@ -30,7 +31,8 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
             result = five2one(sub_idx_vec, sub_idx_const, dc, looktable, dividetable);
             set_hist(result) = set_hist(result) + probMat(idx_const);
         end
-        PiMat(sub_idx_vec) = set_hist;
+        idxCell = num2cell(sub_idx_vec);
+        PiMat{idxCell{:}} = set_hist;
         toc;
     end
 end
