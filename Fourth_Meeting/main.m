@@ -26,6 +26,7 @@ dv = 3;
 dc = 6;
 L_vec = (1/3)*ones(1,3);
 PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
+[IiMat] = Ii(t, q, dv, intersectMat);
 
 H = cell(1,tryMat);
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
