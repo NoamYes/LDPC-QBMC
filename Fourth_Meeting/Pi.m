@@ -21,8 +21,8 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
         I = cell(1, vec_ndims); 
         [I{:}] = ind2sub(vec_mat_size,idx_vec);
         sub_idx_vec = cell2mat(I);
-        
         set_hist = zeros(1, t);
+
         for idx_const = 1:numel(probMat)
             J = cell(1, const_ndims); 
             [J{:}] = ind2sub(const_mat_size,idx_const);
@@ -33,6 +33,7 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
         end
         idxCell = num2cell(sub_idx_vec);
         PiMat{idxCell{:}} = set_hist;
+        
         toc;
     end
 end
