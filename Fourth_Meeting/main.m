@@ -18,6 +18,7 @@ q=4;
 % dividetable = divide(q);
 % intersectTable = intersect_lookup(subsetTable);
 load('q=4_lookups.mat');
+load('uniform_Pi_Ii_4.mat');
 t = length(subsetTable);
 
 e1_vec = 0:inc:1;
@@ -25,11 +26,13 @@ e2_vec = 0:inc:1;
 dv = 3; 
 dc = 6;
 L_vec = (1/3)*ones(1,3);
-PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
-[IiMat] = Ii(t, q, dv, intersectTable);
-
+% PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
+% [IiMat] = Ii(t, q, dv, intersectTable);
+e_vec = [0 1/2 1/2];
+[Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q)
 H = cell(1,tryMat);
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
+
 
 for mat_iter = 1:tryMat
     H{mat_iter} = Generate_LDCP_H( dv, dc, k, n, q ); %generate a random H matrix
