@@ -10,7 +10,7 @@ function [IiMat] = Ii(t, q, dv, intersectMat)
     IiMat = cell(set_vec);
 
     for idx_vec = 1:numel(set_mat)
-        tic
+      %  tic
         I = cell(1, vec_ndims); 
         [I{:}] = ind2sub(vec_mat_size,idx_vec);
         sub_idx_vec = cell2mat(I);
@@ -19,6 +19,6 @@ function [IiMat] = Ii(t, q, dv, intersectMat)
         i_vec = zeros(1,t);
         i_vec(inter) = 1;
         IiMat{idxCell{:}} = i_vec;
-        toc;
+       % toc;
     end
 end

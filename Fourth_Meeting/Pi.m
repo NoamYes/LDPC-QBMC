@@ -17,7 +17,7 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
 
     
     for idx_vec = 1:numel(set_mat)
-        tic
+        % tic
         I = cell(1, vec_ndims); 
         [I{:}] = ind2sub(vec_mat_size,idx_vec);
         sub_idx_vec = cell2mat(I);
@@ -34,6 +34,6 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
         idxCell = num2cell(sub_idx_vec);
         PiMat{idxCell{:}} = set_hist;
         
-        toc;
+        %toc;
     end
 end
