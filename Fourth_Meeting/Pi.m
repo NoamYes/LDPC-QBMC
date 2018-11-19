@@ -5,7 +5,7 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
 %     pi_vec = t*ones(1, dc);
 %     const_vec = (q-1)*ones(1, dc);
     
-    probMat = probMatrix(q, dc, L_vec);
+    probMat = (q-1)^dc*probMatrix(q, dc, L_vec);
     set_mat = zeros(set_vec);
     
     vec_ndims = ndims(set_mat);
@@ -32,7 +32,7 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
             set_hist(result) = set_hist(result) + probMat(idx_const);
         end
         idxCell = num2cell(sub_idx_vec);
-        PiMat{idxCell{:}} = set_hist;
+        PiMat{idxCell{:}} = set_hist./((q-1)^dc);
         
         %toc;
     end

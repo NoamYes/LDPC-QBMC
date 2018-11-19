@@ -13,22 +13,22 @@ tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
 
-% subsetTable = subset(q);
-% looktable = look_up(q, subsetTable);
-% dividetable = divide(q);
-% intersectTable = intersect_lookup(subsetTable);
-load('q=4_lookups.mat');
-load('uniform_Pi_Ii_4.mat');
+subsetTable = subset(q);
+looktable = look_up(q, subsetTable);
+dividetable = divide(q);
+intersectTable = intersect_lookup(subsetTable);
+% load('q=4_lookups.mat');
+% load('uniform_Pi_Ii_4.mat');
 t = length(subsetTable);
 
 e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
 dv = 3; 
-dc = 6;
-L_vec = (1/3)*ones(1,3);
-% PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
-% [IiMat] = Ii(t, q, dv, intersectTable);
-e_vec = [0 1/2 1/2];
+dc = 3;
+L_vec = (1/(q-1))*ones(1,q-1);
+e_vec = [0 1 0];
+PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
+[IiMat] = Ii(t, q, dv, intersectTable);
 [Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q)
 H = cell(1,tryMat);
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);

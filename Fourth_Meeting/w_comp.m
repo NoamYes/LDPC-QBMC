@@ -11,9 +11,9 @@ function [W] = w_comp(Z, Pi)
             [I{:}] = ind2sub(vec_mat_size,idx_vec);
             sub_idx_vec = cell2mat(I);
             Jordi = Z(sub_idx_vec);
-            tmp_PiVec = Pi{sub_idx_vec};
-            sum = sum + prod(Jordi)*tmp_PiVec(idx);
-           
+            H_idx = num2cell(sub_idx_vec);
+            tmp_PiVec = Pi(H_idx{:});
+            sum = sum + prod(Jordi)*tmp_PiVec{1}(idx); %%% CHECK THAT OUT (CAPS FOR DORE)
            % toc;
         end
         W(idx) = sum;
