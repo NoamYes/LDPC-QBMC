@@ -13,32 +13,28 @@ tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 q=4;
 
-subsetTable = subset(q);
-looktable = look_up(q, subsetTable);
-dividetable = divide(q);
-intersectTable = intersect_lookup(subsetTable);
-% load('q=4_lookups.mat');
-% load('uniform_Pi_Ii_4.mat');
+% subsetTable = subset(q);
+% looktable = look_up(q, subsetTable);
+% dividetable = divide(q);
+% intersectTable = intersect_lookup(subsetTable);
+
+load('q=4_lookups.mat');
+load('uniform_Pi_Ii_4.mat');
 t = length(subsetTable);
 
 e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
+
 dv = 3; 
-dc = 3;
+dc = 6;
 L_vec = (1/(q-1))*ones(1,q-1);
-e_vec = [0 1 0];
-PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
-[IiMat] = Ii(t, q, dv, intersectTable);
-[Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q)
-H = cell(1,tryMat);
+% PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
+% [IiMat] = Ii(t, q, dv, intersectTable);
+% [Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q);
+
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
 
-
-for mat_iter = 1:tryMat
-    H{mat_iter} = Generate_LDCP_H( dv, dc, k, n, q ); %generate a random H matrix
-end
-
-tic
+tic;
 for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of inc
     e1 = e1_vec(idx);
     parfor jdx = 1:numel(e2_vec)
@@ -46,26 +42,19 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
         if e1 + e2 > 1
             mean_mat(idx,jdx) = 1;
         else
-            totalNoise = zeros(tryVec, tryMat);
-            for mat_iter = 1:tryMat %run on the number of matrixes
-                for vec_iter = 1:tryVec %run on the number of vectors to
-                    vec = BECnoise(n, [e1, e2]); %generate a 0 vec with random noise
-                    totalNoise(vec_iter,mat_iter) = iter(H{mat_iter}, vec, iterLen, dc, looktable, dividetable, q, intersectTable); %save the
-                    %ratio of the noise after iterations to the total noise matrix
-                end
-            end
-            mean_mat(idx,jdx) = mean(mean(totalNoise)); %calc the mean of all the noise
-            % for a given epsilon
+            e_vec = [(1-e1-e2) e1 e2];
+            [Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q);
+            mean_mat(idx,jdx) = 1 - Z(1);
         end
     end
-    disp(round(idx/numel(e1_vec)*100,1)+"% done in "+round(toc,1)+" (sec)");
+     disp(round(idx/numel(e1_vec)*100,1)+"% done in "+round(toc,1)+" (sec)");
 end
 figure(1)
 imshow(mean_mat.', 'XData', e2_vec, 'YData', e1_vec);
 axis on;
 view(-90,90)
 truesize([300 200]);
-xlabel('one bits Erasure [\epsilon_{1}]');
+xlabel('one bit Erasure [\epsilon_{1}]');
 ylabel('two bits Erasure [\epsilon_{2}]');
 str_title = "total erasure rate for q = " + q;
 title(str_title);

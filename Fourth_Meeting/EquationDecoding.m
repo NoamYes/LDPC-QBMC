@@ -8,6 +8,10 @@ iterLen = 100;
 
         W = w_comp(Z, Pi);
         Z = z_comp(W, Ii, e_vec);
+        Z = Z/sum(Z);
+        if sum(Z == 1) > 0
+            break;
+        end
 
     end
 
