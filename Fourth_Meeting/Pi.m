@@ -14,10 +14,10 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
     const_mat_size = size(probMat);
     
     PiMat = cell(set_vec);
-
-    
+    percent = 1;
+    tic
     for idx_vec = 1:numel(set_mat)
-        % tic
+        
         I = cell(1, vec_ndims); 
         [I{:}] = ind2sub(vec_mat_size,idx_vec);
         sub_idx_vec = cell2mat(I);
@@ -33,7 +33,9 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
         end
         idxCell = num2cell(sub_idx_vec);
         PiMat{idxCell{:}} = set_hist./((q-1)^dc);
-        
-        %toc;
+        if percent*round(numel(set_mat)/100) == idx_vec
+            display(percent+"% : "+toc);
+            percent = percent + 1;
+        end
     end
 end
