@@ -11,15 +11,15 @@ inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
-q=16;
+q=4;
 
 %  subsetTable = subset(q);
 % looktable = look_up(q, subsetTable);
 % dividetable = divide(q);
 % intersectTable = intersect_lookup(subsetTable);
 
-load('q=16_lookups.mat');
-% load('uniform_Pi_Ii_4.mat');
+load('q=4_lookups.mat');
+load('uniform_Pi_Ii_4.mat');
 t = length(subsetTable);
 
 e1_vec = 0:inc:1;
@@ -28,7 +28,7 @@ e2_vec = 0:inc:1;
 dv = 3; 
 dc = 6;
 L_vec = (1/(q-1))*ones(1,q-1);
-PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
+%PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
 %[IiMat] = Ii(t, q, dv, intersectTable);
 % [Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q);
 
