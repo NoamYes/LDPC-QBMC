@@ -1,12 +1,11 @@
-function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable) 
+function [PiMat] = Pi_approx(t, q, L_vec, dc, looktable, dividetable) 
     % PiMat is a t matrix of dimension dc (aka t x t x t dc times)
     % 
     set_vec = t*ones(1, dc-1);
 %     pi_vec = t*ones(1, dc);
 %     const_vec = (q-1)*ones(1, dc);
     
-    % probMat = (q-1)^dc*probMatrix(q, dc, L_vec);
-    load('probMat_q=16.mat');
+    probMat = (q-1)^dc*probMatrix(q, dc, L_vec);
     set_mat = zeros(set_vec);
     
     vec_ndims = ndims(set_mat);

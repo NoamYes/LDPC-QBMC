@@ -20,17 +20,37 @@ q=4;
 
 load('q=4_lookups.mat');
 load('uniform_Pi_Ii_4.mat');
-t = length(subsetTable);
 
-e1_vec = 0:inc:1;
-e2_vec = 0:inc:1;
+%% PI CAL
+
+t = length(subsetTable);
+subsetsLen = cellfun('length', subsetTable);
+lenIdxsTable = cell(1,q);
+Pi_len_cell = cell(1,q);
+for len = 1:q
+    [~,lenIdxsTable{len}] = find(subsetsLen == len);
+    pi = zeros(1,t);
+    pi(lenIdxsTable{len}) = 1/numel(lenIdxsTable{len});
+    Pi_len_cell{len} = pi(lenIdxsTable{len});
+end
+
+
+
+
+%%
+
+% e1_vec = 0:inc:1;
+% e2_vec = 0:inc:1;
+
+e_vec = [1/3 1/3 1/3];
 
 dv = 3; 
 dc = 6;
 L_vec = (1/(q-1))*ones(1,q-1);
 %PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
 %[IiMat] = Ii(t, q, dv, intersectTable);
-% [Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q);
+[Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q);
+% [Z] = EquationDecoding2(e_vec , PiMat, Pi_len_cell, IiMat, t, q, dc, looktable, dividetable);
 
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
 
