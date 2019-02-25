@@ -24,32 +24,21 @@ load('q=4_lookups.mat');
 
 t = length(subsetTable);
 subsetsLen = cellfun('length', subsetTable);
-lenIdxsTable = cell(1,q);
-size_distribution_cell = cell(1,q);
+size_distribution = zeros(q,t);
 for len = 1:q
-    [~,lenIdxsTable{len}] = find(len >= subsetsLen);
-    pi = zeros(1,t);
-    pi(lenIdxsTable{len}) = 1/numel(lenIdxsTable{len});
-    size_distribution_cell{len} = pi;
+    [~, idx] = find(len >= subsetsLen);
+    size_distribution(len,idx) = 1/numel(idx);
 end
-
-
-
 
 %%
 
 e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
-
-e_vec = [1/3 1/3 1/3];
-
 dv = 3; 
 dc = 6;
-L_vec = (1/(q-1))*ones(1,q-1);
-%PiMat = Pi(t, q, L_vec, dc, looktable, dividetable);
-[IiMat] = Ii(t, q, dv, intersectTable);
-% [Z] = EquationDecoding(e_vec , PiMat, IiMat, t, q);
-% [Z] = EquationDecoding2(e_vec , Pi_len_cell, IiMat, t, q, dc, looktable, dividetable, subsetsLen);
+
+check = checkCalc(t, q, dc, subsetsLen);
+var = varCalc(t, q, dv, subsetsLen);
 
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
 
@@ -62,7 +51,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
             mean_mat(idx,jdx) = 1;
         else
             e_vec = [(1-e1-e2) e1 e2];
-            [Z] = EquationDecoding2(e_vec , size_distribution_cell, IiMat, t, q, dc, looktable, dividetable, subsetsLen);
+            [Z] = EquationDecoding(e_vec , size_distribution, t, q, dc, dv, check, var);
             mean_mat(idx,jdx) = 1 - Z(1);
         end
     end

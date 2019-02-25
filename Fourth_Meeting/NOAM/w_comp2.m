@@ -24,3 +24,5 @@ function [W] = w_comp2(Z, t,q, Pi_len_cell, dc, looktable, dividetable, subsetsL
 
 end
 
+
+
