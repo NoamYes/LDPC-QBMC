@@ -3,7 +3,6 @@ clc; clear all; close all;
 %%
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
-dbstop if error
 
 n = 60; %n
 k = round(n/2); %k
@@ -27,7 +26,7 @@ subsetsLen = cellfun('length', subsetTable);
 size_distribution = zeros(q,t);
 for len = 1:q
     [~, idx] = find(len >= subsetsLen);
-    size_distribution(len,idx) = 1/numel(idx);
+    size_distribution(len,idx) = 1/numel(idx); % assume uniform dist.
 end
 
 %%
@@ -40,6 +39,12 @@ dc = 6;
 check = checkCalc(t, q, dc, subsetsLen);
 var = varCalc(t, q, dv, subsetsLen);
 
+checkDist = zeros(1,t);
+for i = 1:q
+    [~, idx] = find(subsetsLen <= i);
+    checkDist(idx) = checkDist(idx) + check(i)*size_distribution(i, idx);
+end
+
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
 
 tic;
@@ -51,7 +56,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
             mean_mat(idx,jdx) = 1;
         else
             e_vec = [(1-e1-e2) e1 e2];
-            [Z] = EquationDecoding(e_vec , size_distribution, t, q, dc, dv, check, var);
+            [Z] = EquationDecoding(e_vec, q, dc, dv, subsetsLen);
             mean_mat(idx,jdx) = 1 - Z(1);
         end
     end
