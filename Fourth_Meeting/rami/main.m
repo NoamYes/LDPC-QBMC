@@ -50,13 +50,13 @@ mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
 tic;
 for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of inc
     e1 = e1_vec(idx);
-    parfor jdx = 1:numel(e2_vec)
+    for jdx = 1:numel(e2_vec)
         e2 = e2_vec(jdx);
         if e1 + e2 > 1
             mean_mat(idx,jdx) = 1;
         else
             e_vec = [(1-e1-e2) e1 e2];
-            [Z] = EquationDecoding(e_vec, q, dc, dv, subsetsLen);
+            [Z] = EquationDecoding(e_vec, q, dc, dv);
             mean_mat(idx,jdx) = 1 - Z(1);
         end
     end
