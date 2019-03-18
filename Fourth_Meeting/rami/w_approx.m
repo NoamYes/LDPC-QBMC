@@ -17,5 +17,4 @@ function [W] = w_approx(Z, q, dc)
         Jordi = Z(sub_idx_vec);
         W(log2(multiSize) + 1) = W(log2(multiSize) + 1) + prod(Jordi);
     end
-
 end

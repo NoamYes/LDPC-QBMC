@@ -1,0 +1,266 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\def\HeblatexEncoding{HE8}
+\def\HeblatexEncodingFile{he8enc}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language hebrew
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "palatino" "default"
+\font_sans "helvet" "default"
+\font_typewriter "courier" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 95 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 0
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 0
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1cm
+\topmargin 1cm
+\rightmargin 1cm
+\bottommargin 1cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+אנו רוצים לפתור שתי בעיות:
+\end_layout
+
+\begin_layout Enumerate
+הבעיה הראשונה היא למצוא בסט איברים 
+\begin_inset Formula $\left\{ a_{1},a_{2},\dots,a_{dc-1}\right\} $
+\end_inset
+
+, שמקבלים ערכים 
+\begin_inset Formula $2^{k}$
+\end_inset
+
+ כך ש 
+\begin_inset Formula $k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)+1\right\} $
+\end_inset
+
+, כמה אפשרויות יש מכל סוג, כשהגורם הממיין הוא 
+\begin_inset Formula $\max\left(q,\prod a_{i}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+הבעיה השנייה היא למצוא בסט איברים 
+\begin_inset Formula $\left\{ a_{1},a_{2},\dots,a_{dv-1}\right\} $
+\end_inset
+
+, שמקבלים ערכים 
+\begin_inset Formula $2^{k}$
+\end_inset
+
+ כך ש 
+\begin_inset Formula $k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)+1\right\} $
+\end_inset
+
+, כמה אפשרויות יש מכל סוג, כשהגורם הממיין הוא 
+\begin_inset Formula $\min\left(a_{i}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Enumerate
+עבור 
+\begin_inset Formula $P_{i}$
+\end_inset
+
+ - מציאת פתרון לבעיה של 
+\begin_inset Formula $\left\{ a_{1},a_{2},\dots a_{dc-1}\right\} $
+\end_inset
+
+ איברים, כך ש 
+\begin_inset Formula $a_{i}\in\left\{ 2^{k}\big|k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)+1\right\} ,i\in\left\{ 1,2,\dots,dc-1\right\} \right\} $
+\end_inset
+
+.
+ אנו רוצים למצוא את מספר הקומבינציות האפשריות של איברים כך ש 
+\begin_inset Formula $a_{1}\cdot a_{2}\cdot\dots\cdot a_{dc-1}=2^{b}$
+\end_inset
+
+ )עבור 
+\begin_inset Formula $b\in\left\{ 0,1,\dots\log_{2}\left(q\right)+1\right\} $
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+ניתן לכתוב את הבעיה בצורה אחרת - 
+\begin_inset Formula $a_{1}\cdot a_{2}\cdot\dots\cdot a_{dc-1}=2^{k_{1}}\cdot2^{k_{2}}\cdot\dots\cdot2^{k_{dc-1}}=2^{b}$
+\end_inset
+
+, כלומר נקבל 
+\begin_inset Formula $2^{k_{1}+k_{2}+\dots+k_{dc-1}}=2^{b}$
+\end_inset
+
+ וקיבלנו את המשוואה 
+\begin_inset Formula $\sum_{i=1}^{dc-1}k_{i}=b$
+\end_inset
+
+, שאותה אנו יודעים לפתור - פתרון משוואה בשלמים שהפתרון שלה הוא -
+\begin_inset Formula 
+\[
+D\left(dc-1,b\right)={dc-1-1+b \choose b}
+\]
+
+\end_inset
+
+עבור 
+\begin_inset Formula $0\leq k_{i},b\leq\log_{2}\left(q\right)+1$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+לכן ניתן כעת להגדיר את -
+\begin_inset Formula 
+\[
+\left|P_{i}\right|=\left\{ \begin{array}{cc}
+{dc-2+i-1 \choose i-1} & i<\log_{2}\left(q\right)+1\\
+\left(\log_{2}\left(q\right)+1\right)^{dc-1}-\sum_{j=1}^{\log_{2}\left(q\right)+1}\left|P_{j}\right| & i=\log_{2}\left(q\right)+1
+\end{array}\right.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+עבור 
+\begin_inset Formula $Q_{i}$
+\end_inset
+
+ - המצב הרבה יותר פשוט כי אנו מחפשים את המינימום, כלומר שמבין כל ה 
+\begin_inset Formula $dv-1$
+\end_inset
+
+ האופציות למספרים השייכים ל 
+\begin_inset Formula $\left\{ 2^{k}\big|k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)+1\right\} \right\} $
+\end_inset
+
+, אנו רוצים שהמינימאלי מהם יהיה 
+\begin_inset Formula $2^{i}$
+\end_inset
+
+, אז ביותר קלות ניתן לדרוש את ההופכי, כלומר שהמקסימאלי מביניהם יהיה 
+\begin_inset Formula $2^{i-1}$
+\end_inset
+
+, ולכן נקבל ש - 
+\begin_inset Formula 
+\[
+\left|Q_{i}\right|=\left[\log_{2}\left(q\right)+1\right]^{dv-1}-\sum_{j=i}^{i}\left[\log_{2}\left(q\right)+1-j\right]^{dv-1}
+\]
+
+\end_inset
+
+כל זה בהנחה שיש לנו 
+\begin_inset Formula $\log_{2}\left(q\right)+1$
+\end_inset
+
+ אופציות לגדלים )
+\numeric on
+1,2,4,8
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+וכו'( ויש לנו 
+\begin_inset Formula $dv-1$
+\end_inset
+
+ אופציות כללו )ויש רק אחד מכל סוג(.
+\end_layout
+
+\end_body
+\end_document

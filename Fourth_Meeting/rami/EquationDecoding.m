@@ -1,6 +1,6 @@
 function [Z] = EquationDecoding(e_vec, q, dc, dv)
 
-Z = [e_vec 0];
+Z = e_vec;
 iterLen = 100;
     for iter = 1:iterLen
 
@@ -10,8 +10,8 @@ iterLen = 100;
         if sum(Z == 1) > 0
             break;
         end
-
+        
     end
-
+    
 end
 
