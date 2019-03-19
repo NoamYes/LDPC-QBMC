@@ -10,7 +10,7 @@ inc = 0.05; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
-q=8;
+
 dv = 3; 
 dc = 6;
 
@@ -22,13 +22,23 @@ dc = 6;
 
 
 %% size distribution
-
-[sizeDist,sizeDistPerc] = sizeDistribution(dc,q);
-sizeDist2 = checkCalc2(q, dc);
+q = [4, 8, 16, 32, 64];
+entropDist = q;
+sizeDistCell = cell(1,length(q));
+sizeDistPercCell = cell(1,length(q));
+for i = 1:length(q)
+    [sizeDist,sizeDistPerc] = sizeDistribution(dc,q(i)); %% analytic solution to size distribution
+    entropDist(i) = entropy(sizeDistPerc); %% vector of entropies - seemingly low entropy wanted
+    sizeDistCell{i} = sizeDist; % Size distribution at integers
+    sizeDistPercCell{i} = sizeDistPerc(end); % size percentage distribution
+end
+% [sizeDist,sizeDistPerc] = sizeDistribution(dc,q);
+% sizeDist2 = checkCalc2(q, dc);
 
 load('q=4_lookups.mat');
 
 %% PI CAL
+q=4;
 
 t = length(subsetTable);
 subsetsLen = cellfun('length', subsetTable);
