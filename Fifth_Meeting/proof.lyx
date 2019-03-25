@@ -84,7 +84,7 @@
 \end_layout
 
 \begin_layout Enumerate
-הבעיה הראשונה היא למצוא בסט איברים 
+הבעיה הראשונה מוגדרת באופן הבא - בהינתן סט איברים 
 \begin_inset Formula $\left\{ a_{1},a_{2},\dots,a_{dc-1}\right\} $
 \end_inset
 
@@ -93,144 +93,96 @@
 \end_inset
 
  כך ש 
-\begin_inset Formula $k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)+1\right\} $
+\begin_inset Formula $k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)\right\} $
 \end_inset
 
-, כמה אפשרויות יש מכל סוג, כשהגורם הממיין הוא 
-\begin_inset Formula $\max\left(q,\prod a_{i}\right)$
+, כלומר האיברים שלנו מהצורה - 
+\begin_inset Formula $\left\{ 2^{k_{1}},2^{k_{2}},\dots,2^{k_{dc-1}}\right\} $
 \end_inset
 
-.
-\end_layout
-
-\begin_layout Enumerate
-הבעיה השנייה היא למצוא בסט איברים 
-\begin_inset Formula $\left\{ a_{1},a_{2},\dots,a_{dv-1}\right\} $
+, אנו מעוניינים למצוא, בהינתן 
+\begin_inset Formula $1\leq m\leq q$
 \end_inset
 
-, שמקבלים ערכים 
-\begin_inset Formula $2^{k}$
-\end_inset
-
- כך ש 
-\begin_inset Formula $k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)+1\right\} $
-\end_inset
-
-, כמה אפשרויות יש מכל סוג, כשהגורם הממיין הוא 
-\begin_inset Formula $\min\left(a_{i}\right)$
+ כמה קומבינציות אפשרויות יש כך ש 
+\begin_inset Formula $\max\left(q,\prod_{i=1}^{dc-1}a_{i}\right)=m$
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Enumerate
-עבור 
-\begin_inset Formula $P_{i}$
+ למשל עבור 
+\begin_inset Formula $dc=4$
 \end_inset
 
- - מציאת פתרון לבעיה של 
-\begin_inset Formula $\left\{ a_{1},a_{2},\dots a_{dc-1}\right\} $
+ ו 
+\begin_inset Formula $q=4$
 \end_inset
 
- איברים, כך ש 
-\begin_inset Formula $a_{i}\in\left\{ 2^{k}\big|k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)+1\right\} ,i\in\left\{ 1,2,\dots,dc-1\right\} \right\} $
+ ובהינתן 
+\begin_inset Formula $m=1$
 \end_inset
 
-.
- אנו רוצים למצוא את מספר הקומבינציות האפשריות של איברים כך ש 
-\begin_inset Formula $a_{1}\cdot a_{2}\cdot\dots\cdot a_{dc-1}=2^{b}$
+ אז יש
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בדיוק קומבינציה אחת שנותנת את הדרישה והיא 
+\begin_inset Formula $\left\{ 1,1,1\right\} $
 \end_inset
 
- )עבור 
-\begin_inset Formula $b\in\left\{ 0,1,\dots\log_{2}\left(q\right)+1\right\} $
+ )כי 
+\begin_inset Formula $1\cdot1\cdot1=1$
 \end_inset
 
-.
-\begin_inset Newline newline
+( לעומת זאת עבור 
+\begin_inset Formula $m=2$
 \end_inset
 
-ניתן לכתוב את הבעיה בצורה אחרת - 
-\begin_inset Formula $a_{1}\cdot a_{2}\cdot\dots\cdot a_{dc-1}=2^{k_{1}}\cdot2^{k_{2}}\cdot\dots\cdot2^{k_{dc-1}}=2^{b}$
-\end_inset
-
-, כלומר נקבל 
-\begin_inset Formula $2^{k_{1}+k_{2}+\dots+k_{dc-1}}=2^{b}$
-\end_inset
-
- וקיבלנו את המשוואה 
-\begin_inset Formula $\sum_{i=1}^{dc-1}k_{i}=b$
-\end_inset
-
-, שאותה אנו יודעים לפתור - פתרון משוואה בשלמים שהפתרון שלה הוא -
-\begin_inset Formula 
-\[
-D\left(dc-1,b\right)={dc-1-1+b \choose b}
-\]
-
-\end_inset
-
-עבור 
-\begin_inset Formula $0\leq k_{i},b\leq\log_{2}\left(q\right)+1$
-\end_inset
-
-.
-\begin_inset Newline newline
-\end_inset
-
-לכן ניתן כעת להגדיר את -
-\begin_inset Formula 
-\[
-\left|P_{i}\right|=\left\{ \begin{array}{cc}
-{dc-2+i-1 \choose i-1} & i<\log_{2}\left(q\right)+1\\
-\left(\log_{2}\left(q\right)+1\right)^{dc-1}-\sum_{j=1}^{\log_{2}\left(q\right)+1}\left|P_{j}\right| & i=\log_{2}\left(q\right)+1
-\end{array}\right.
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-עבור 
-\begin_inset Formula $Q_{i}$
-\end_inset
-
- - המצב הרבה יותר פשוט כי אנו מחפשים את המינימום, כלומר שמבין כל ה 
-\begin_inset Formula $dv-1$
-\end_inset
-
- האופציות למספרים השייכים ל 
-\begin_inset Formula $\left\{ 2^{k}\big|k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)+1\right\} \right\} $
-\end_inset
-
-, אנו רוצים שהמינימאלי מהם יהיה 
-\begin_inset Formula $2^{i}$
-\end_inset
-
-, אז ביותר קלות ניתן לדרוש את ההופכי, כלומר שהמקסימאלי מביניהם יהיה 
-\begin_inset Formula $2^{i-1}$
-\end_inset
-
-, ולכן נקבל ש - 
-\begin_inset Formula 
-\[
-\left|Q_{i}\right|=\left[\log_{2}\left(q\right)+1\right]^{dv-1}-\sum_{j=i}^{i}\left[\log_{2}\left(q\right)+1-j\right]^{dv-1}
-\]
-
-\end_inset
-
-כל זה בהנחה שיש לנו 
-\begin_inset Formula $\log_{2}\left(q\right)+1$
-\end_inset
-
- אופציות לגדלים )
+ יש
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
 \numeric on
-1,2,4,8
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+3
 \family roman
 \series medium
 \shape up
@@ -255,11 +207,438 @@ D\left(dc-1,b\right)={dc-1-1+b \choose b}
 \uwave default
 \noun default
 \color inherit
-וכו'( ויש לנו 
+אפשרויות, למשל 
+\begin_inset Formula $\left\{ 1,2,1\right\} $
+\end_inset
+
+ )כי 
+\begin_inset Formula $1\cdot2\cdot1=2$
+\end_inset
+
+(, אך עבור 
+\begin_inset Formula $m=4$
+\end_inset
+
+ יש יותר אפשריות ובין היתר יש שם את האיבר 
+\begin_inset Formula $\left\{ 4,1,1\right\} $
+\end_inset
+
+ וכן האיבר 
+\begin_inset Formula $\left\{ 2,1,2\right\} $
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+עבור המקרה שבוא המכפלה יוצאת יותר קטנה מ 
+\begin_inset Formula $q$
+\end_inset
+
+, ניתן לכתוב את הבעיה בצורה אחרת - 
+\begin_inset Formula $a_{1}\cdot a_{2}\cdot\dots\cdot a_{dc-1}=2^{k_{1}}\cdot2^{k_{2}}\cdot\dots\cdot2^{k_{dc-1}}=m=2^{b}$
+\end_inset
+
+ )כאשר 
+\begin_inset Formula $0\leq b\leq\log_{2}\left(q\right)$
+\end_inset
+
+( כלומר נקבל 
+\begin_inset Formula $2^{k_{1}+k_{2}+\dots+k_{dc-1}}=2^{b}$
+\end_inset
+
+ וקיבלנו את המשוואה 
+\begin_inset Formula $\sum_{i=1}^{dc-1}k_{i}=b$
+\end_inset
+
+, שאותה אנו יודעים לפתור על ידי פתרון משוואה בשלמים, שהפתרון שלה הוא -
+\begin_inset Formula 
+\[
+D\left(dc-1,b\right)={dc-1-1+b \choose b}
+\]
+
+\end_inset
+
+עבור 
+\begin_inset Formula $0\leq k_{i},b\leq\log_{2}\left(q\right)$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+עבור המקרה שבוא המכפלה יוצאת 
+\begin_inset Formula $q$
+\end_inset
+
+ או מספר יותר גדול, אפשר לחשב את המקרה הזה על ידי חיסור פשוט של כל הקומבינציות
+ האפשריות שיש לסידור 
+\begin_inset Formula $dc-1$
+\end_inset
+
+ איברים כשכל אחד מהם יכול לקבל 
+\begin_inset Formula $\log_{2}\left(q\right)+1$
+\end_inset
+
+ קומבינציות אפשריות )
+\begin_inset Formula $\left(\log_{2}\left(q\right)+1\right)^{dc-1}$
+\end_inset
+
+( מכל שאר הקומבינציות שכבר חישבנו.
+\begin_inset Newline newline
+\end_inset
+
+לכן ניתן כעת ניתן לפתור ולקבל את 
+\begin_inset Formula $\tilde{P}_{i}$
+\end_inset
+
+ שמסמן את כמות האיברים שאנו מחפשים שמקיימים את התנאי ש 
+\begin_inset Formula $\max\left(q,\prod_{j=1}^{dc-1}a_{j}\right)=2^{i}$
+\end_inset
+
+-
+\begin_inset Formula 
+\[
+\tilde{P}_{i}=\left\{ \begin{array}{cc}
+{dc-2+i-1 \choose i-1} & 0\leq i\leq\log_{2}\left(q\right)\\
+\left(\log_{2}\left(q\right)+1\right)^{dc-1}-\sum_{j=1}^{\log_{2}\left(q\right)}\tilde{P}_{j} & i=\log_{2}\left(q\right)+1
+\end{array}\right.
+\]
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+ניתן לשים לב ש 
+\begin_inset Formula $\tilde{P}_{i}$
+\end_inset
+
+ מתאר גודל קבוצה באורך של
+\family roman
+\series medium
+\shape up
+\size small
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+
+\begin_inset Formula $2^{i-1}$
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+הבעיה השנייה מגודרת באופן הבא - בהינתן סט איברים 
+\begin_inset Formula $\left\{ a_{1},a_{2},\dots,a_{dv-1}\right\} $
+\end_inset
+
+, שמקבלים ערכים 
+\begin_inset Formula $2^{k}$
+\end_inset
+
+ כך ש 
+\begin_inset Formula $k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)\right\} $
+\end_inset
+
+, אנו מעוניינים למצוא, בהינתן 
+\begin_inset Formula $1\leq m\leq q$
+\end_inset
+
+ כמה קומבינציות אפשרויות יש כך 
+\begin_inset Formula $\min\left(a_{i}\right)=m$
+\end_inset
+
+.
+ למשל עבור 
+\begin_inset Formula $dc=4$
+\end_inset
+
+ ו 
+\begin_inset Formula $q=4$
+\end_inset
+
+ ובהינתן 
+\begin_inset Formula $m=4$
+\end_inset
+
+ אז יש
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+בדיוק קומבינציה אחת שנותנת את הדרישה והיא 
+\begin_inset Formula $\left\{ 4,4,4\right\} $
+\end_inset
+
+ )כי 
+\begin_inset Formula $\min\left(4,4,4\right)=4$
+\end_inset
+
+( לעומת זאת עבור 
+\begin_inset Formula $m=3$
+\end_inset
+
+ יש
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+יותר
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+אפשרויות, כי למשל גם 
+\begin_inset Formula $\left\{ 3,3,3\right\} $
+\end_inset
+
+ מקיים את התנאי וכמו כן 
+\begin_inset Formula $\left\{ 4,4,3\right\} $
+\end_inset
+
+ וכן 
+\begin_inset Formula $\left\{ 3,3,4\right\} $
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+כעת המצב הרבה יותר פשוט כי אנו מחפשים את המינימום, כלומר שמבין כל ה 
 \begin_inset Formula $dv-1$
 \end_inset
 
- אופציות כללו )ויש רק אחד מכל סוג(.
+ האופציות למספרים השייכים ל 
+\begin_inset Formula $\left\{ 2^{k}\big|k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)\right\} \right\} $
+\end_inset
+
+, אנו רוצים שהמינימאלי מהם יהיה 
+\begin_inset Formula $2^{i}$
+\end_inset
+
+.
+ ראשית נחשב כמה דרכים יש לבחור 
+\begin_inset Formula $dv-1$
+\end_inset
+
+ מספרים כך שכל המספרים יהיו לפחות 
+\begin_inset Formula $2^{i}$
+\end_inset
+
+ - שזה 
+\begin_inset Formula $\left(\log_{2}\left(q\right)+1-\left(i+1\right)+1\right)^{dv-1}$
+\end_inset
+
+ )עבור 
+\begin_inset Formula $k\in\left\{ 0,1,\dots,\log_{2}\left(q\right)\right\} $
+\end_inset
+
+( ונחסיר מזה את כל האפרויות שכל המספרים יהיו גדולים/שווים ל 
+\begin_inset Formula $2^{i+1}$
+\end_inset
+
+ - שזה 
+\begin_inset Formula $\left(\log_{2}\left(q\right)+1-\left(i+1\right)\right)^{dv-1}$
+\end_inset
+
+.
+ כעת ניתן להגדיר את 
+\begin_inset Formula $\tilde{Q}_{i}$
+\end_inset
+
+ להיות כמות האיברים שאנו מחפשים שמקיימים ש 
+\begin_inset Formula $\min_{j=1}^{dv-1}\left\{ a_{j}\right\} =2^{i}$
+\end_inset
+
+- 
+\begin_inset Formula 
+\[
+\tilde{Q}_{i}=\left(\log_{2}\left(q\right)-i+1\right)^{dv-1}-\left(\log_{2}\left(q\right)-i\right)^{dv-1}
+\]
+
+\end_inset
+
+וכמו מקודם הביטוי מוגדר עבור 
+\begin_inset Formula $0\leq i\leq\log_{2}\left(q\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+נשים לב שאם כעת נרצה למצוא את אחוז האיברים שיש ב 
+\begin_inset Formula $\tilde{P}_{\log_{2}\left(q\right)+1}$
+\end_inset
+
+ ביחס לכל האיברים האפשריים נקבל את הביטוי - 
+\begin_inset Formula 
+\[
+\frac{\left(\log_{2}\left(q\right)+1\right)^{dc-1}-\sum_{j=1}^{\log_{2}\left(q\right)}{dc-3+j \choose j-1}}{\left(\log_{2}\left(q\right)+1\right)^{dc-1}}=1-\frac{\sum_{j=1}^{\log_{2}\left(q\right)}{dc-3+j \choose j-1}}{\left(\log_{2}\left(q\right)+1\right)^{dc-1}}
+\]
+
+\end_inset
+
+שהוא מונוטוני עולה כתלות ב 
+\begin_inset Formula $q$
+\end_inset
+
+ וכן כל הביטוי שואף ל
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\numeric on
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+1
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\numeric off
+\bar no
+\strikeout off
+\uuline off
+\uwave off
+\noun off
+\color none
+ 
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\strikeout default
+\uuline default
+\uwave default
+\noun default
+\color inherit
+עבור 
+\begin_inset Formula $q\rightarrow\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+לדוגמה, עבור 
+\begin_inset Formula $dc=6$
+\end_inset
+
+ נקבל - 
+\begin_inset Formula 
+\[
+\begin{array}{cc}
+q=4 & :0.9136\\
+q=8 & :0.9453\\
+q=64 & :0.9725
+\end{array}
+\]
+
+\end_inset
+
+
 \end_layout
 
 \end_body
