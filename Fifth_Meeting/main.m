@@ -30,7 +30,7 @@ for i = 1:length(q)
     [sizeDist,sizeDistPerc] = sizeDistribution(dc,q(i)); %% analytic solution to size distribution
     entropDist(i) = entropy(sizeDistPerc); %% vector of entropies - seemingly low entropy wanted
     sizeDistCell{i} = sizeDist; % Size distribution at integers
-    sizeDistPercCell{i} = sizeDistPerc(end); % size percentage distribution
+    sizeDistPercCell{i} = sizeDistPerc; % size percentage distribution
 end
 % [sizeDist,sizeDistPerc] = sizeDistribution(dc,q);
 % sizeDist2 = checkCalc2(q, dc);
@@ -66,7 +66,7 @@ for i = 1:q
 end
 
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
-
+pi = sizeDistPercCell{1};
 tic;
 for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of inc
     e1 = e1_vec(idx);
@@ -76,7 +76,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
             mean_mat(idx,jdx) = 1;
         else
             e_vec = [(1-e1-e2) e1 e2];
-            [Z] = EquationDecoding(e_vec, q, dc, dv);
+            [Z] = EquationDecoding(e_vec, q, dc, dv, pi);
             mean_mat(idx,jdx) = 1 - Z(1);
         end
     end

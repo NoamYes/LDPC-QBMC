@@ -19,7 +19,7 @@ q=4;
 % intersectTable = intersect_lookup(subsetTable);
 
 load('q=4_lookups.mat');
-%load('uniform_Pi_Ii_4.mat');
+load('uniform_Pi_Ii_4.mat');
 
 %% PI CAL
 
@@ -34,7 +34,8 @@ for len = 1:q
     Pi_len_cell{len} = pi;
 end
 
-
+tmp = reshape([PiMat{:}],t,[]);
+sumProbs = sum(tmp,2);
 
 
 %%

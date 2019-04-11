@@ -1,4 +1,4 @@
-function [W] = w_approx(Z, q, dc)
+function [W] = w_approx(Z, q, dc, Pi)
 
     size = 1+log2(q);
     W = zeros(1, size);
@@ -15,6 +15,7 @@ function [W] = w_approx(Z, q, dc)
             multiSize = q;
         end   
         Jordi = Z(sub_idx_vec);
-        W(log2(multiSize) + 1) = W(log2(multiSize) + 1) + prod(Jordi);
+        pi = Pi(subgroupSize(sub_idx_vec, q));
+        W(log2(multiSize) + 1) = W(log2(multiSize) + 1) + prod(Jordi)*(multiSize >= q);
     end
 end
