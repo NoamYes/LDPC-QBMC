@@ -34,11 +34,13 @@ kapa = max(array);
 %% Union Model
 
 K_calc(1, q, array);
-tranMatUnion = ones(q+1);
-for m = 1:q+1
-    for mTag= 1:q+1
+tranMatUnion = zeros(q+1);
+for m = 1:q
+    for mTag= 1:m
       prodChoose = nchoosek(q,m)*nchoosek(q,kapa);
-      tranMatUnion(m,mTag) =  K_calc(m+kapa-mTag, q, array)/prodChoose; 
+      n = m+kapa-mTag;
+%       n(n > q) = q;
+      tranMatUnion(m,mTag) =  K_calc(n, q, array)/prodChoose; 
     end
 end
 
