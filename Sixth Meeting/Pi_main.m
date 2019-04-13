@@ -2,7 +2,8 @@ clear all;
 
 dbstop if error
 
-q = 4;
+q = 16;
+dc = 6;
 diagonal = (0:q)/q;
 tranMat = diag(diagonal);
 tranMat(2:q+2:end)=1-(0:q-1)/q;
@@ -22,6 +23,14 @@ for i=1:log2(q)+1
 end
 
 
+%% Pi Matrix Balls and Bins
+
+PiMat = PiCalc(q, dc);
+
+
+
+
+
 
 
 % find(powers == outDist)
@@ -33,14 +42,16 @@ kapa = max(array);
 
 %% Union Model
 
-K_calc(1, q, array);
-tranMatUnion = zeros(q+1);
-for m = 1:q
-    for mTag= 1:m
-      prodChoose = nchoosek(q,m)*nchoosek(q,kapa);
-      n = m+kapa-mTag;
-%       n(n > q) = q;
-      tranMatUnion(m,mTag) =  K_calc(n, q, array)/prodChoose; 
-    end
-end
+% K_calc(1, q, array);
+% tranMatUnion = zeros(q+1);
+% for m = 1:q
+%     for mTag= 1:m
+%       prodChoose = nchoosek(q,m)*nchoosek(q,kapa);
+%       n = m+kapa-mTag;
+% %       n(n > q) = q;
+%       tranMatUnion(m,mTag) =  K_calc(n, q, array)/prodChoose; 
+%     end
+% end
+
+
 
