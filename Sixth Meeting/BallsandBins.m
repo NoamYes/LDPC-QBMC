@@ -12,14 +12,14 @@ Pi =  1:log2(q)+1;
 g_zero = zeros(1,q+1);
 g_zero(1)=1;
 
-N = prod(sizeArray,'all')-1;
+N = prod(sizeArray,'all');
 g_N = g_zero*(tranMat)^N;
 
 indices = 1:numel(g_N);
-powers = floor(log2((indices)))+1;
+powers = floor(log2(indices-1));
 
-for i=1:log2(q)+1
-   Pi(i) = sum(g_N(powers == i));   
+for i=0:log2(q)
+   Pi(i+1) = sum(g_N(powers == i));   
 end
 
 end
