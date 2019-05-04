@@ -16,11 +16,13 @@ N = prod(sizeArray,'all');
 g_N = g_zero*(tranMat)^N;
 
 indices = 1:numel(g_N);
-powers = floor(log2(indices-1));
-
+powers = ceil(log2(indices-1));
+powers2 = 2.^(0:log2(q));
 for i=0:log2(q)
-   Pi(i+1) = sum(g_N(powers == i));   
+    %    Pi(i+1) = sum(g_N(powers == i));
+    Pi(i+1) = g_N(powers2(i+1)+1);
 end
+Pi = Pi/sum(Pi);
 
 end
 
