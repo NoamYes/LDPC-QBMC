@@ -1,4 +1,4 @@
-function [K] = K_calc(q,M_d)
+function [K] = Km(q,M_d)
     mu = min(M_d);
     K = zers(1,log2(q)+1);
     for idx = 0:numel(K)-1
