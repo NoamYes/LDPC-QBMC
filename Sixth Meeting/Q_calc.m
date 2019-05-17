@@ -1,5 +1,13 @@
-function [K] = Km(q,M_d)
+function [Q] = Q_calc(q,M_d)
     mu = min(M_d);
+    Q = zers(1,log2(q)+1);
+    if mu > 1
+        for idx = 1:numel(Q)
+            for idx = 0:numel(K)-1
+            Q(idx) = K(
+end
+
+function [K] = K_calc(q,M_d,mu)
     K = zers(1,log2(q)+1);
     for idx = 0:numel(K)-1
         m = 2^idx;
