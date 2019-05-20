@@ -27,6 +27,7 @@ load('q=4_lookups.mat');
 %% PI CAL
 q=4;
 PiMat = PiCalc(q, dc);
+IiMat = IiCalc(q, dv);
 
 %%
 
@@ -45,7 +46,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
             mean_mat(idx,jdx) = 1;
         else
             e_vec = [(1-e1-e2) e1 e2];
-            [Z] = EquationDecoding(e_vec, q, dc, dv, PiMat);
+            [Z] = EquationDecoding(e_vec, q, dc, dv, PiMat, IiMat);
             mean_mat(idx,jdx) = 1 - Z(1);
         end
     end
