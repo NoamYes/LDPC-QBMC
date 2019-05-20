@@ -1,4 +1,4 @@
-function [Pi] = BallsandBins(q,sizeArray)
+function [Pi] = P_calc(q,sizeArray)
 
 %BAB Balls and Bins
 %input - q, dc-1 sizes of subgroups

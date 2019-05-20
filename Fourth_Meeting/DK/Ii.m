@@ -7,7 +7,7 @@ function [IiMat] = Ii(t, q, dv, intersectMat)
     vec_ndims = ndims(set_mat);
     vec_mat_size = size(set_mat);
     
-    IiMat = cell([set_vec log2(q)]);
+    IiMat = cell([set_vec log2(q)+1]); %% future D.K added here +1
 
     for s = 1:log2(q)+1
         
