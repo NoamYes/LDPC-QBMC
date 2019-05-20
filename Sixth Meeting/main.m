@@ -11,7 +11,7 @@ tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 
-dv = 3; 
+dv = 3;
 dc = 6;
 
 
