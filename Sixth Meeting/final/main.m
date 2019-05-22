@@ -22,8 +22,8 @@ dc = 6;
 
 
 
-load('q=4_lookups.mat');
-q=4;
+load('q=8_lookups.mat');
+q=8;
 
 e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
@@ -39,7 +39,7 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
         if e1 + e2 > 1
             mean_mat(idx,jdx) = 1;
         else
-            e_vec = [(1-e1-e2) e1 e2];
+            e_vec = [(1-e1-e2) e1 e2 0];
             [Z] = EquationDecoding(e_vec, q, dc, dv);
             mean_mat(idx,jdx) = 1 - Z(1);
         end
