@@ -6,7 +6,7 @@ clc; clear all; close all;
 
 n = 60; %n
 k = round(n/2); %k
-inc = 0.05; %how to increment the epsilon vector
+inc = 0.1; %how to increment the epsilon vector
 tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
@@ -26,8 +26,17 @@ load('q=4_lookups.mat');
 
 %% PI CAL
 q=4;
-PiMat = PiCalc(q, dc);
+
 IiMat = IiCalc(q, dv);
+
+%% Balls and Bins
+% PiMat = PiCalc(q, dc);
+
+%% Union Model
+
+kapa = 1;
+tranMatUnion = UnionTranMat(kapa,q);
+PiMat = PiCalcUnion(q, dc, tranMatUnion);
 
 %%
 

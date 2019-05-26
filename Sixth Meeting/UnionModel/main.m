@@ -31,8 +31,13 @@ q=4;
 IiMat = IiCalc(q, dv);
 
 %% Balls and Bins
-PiMat = PiCalc(q, dc);
+% PiMat = PiCalc(q, dc);
 
+%% Union Model
+
+kapa = 4;
+tranMatUnion = UnionTranMat(kapa,q);
+PiMat = PiCalcUnion(q, dc, tranMatUnion);
 
 %%
 
