@@ -7,6 +7,8 @@ dbstop if error
 n = 60; %n
 k = round(n/2); %k
 inc = 0.05; %how to increment the epsilon vector
+inc1 = 0.1; %different resolution
+inc2 = 0.01;
 tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
@@ -32,9 +34,21 @@ PiMat = PiCalc(q, dc);
 %%
 
 
-e1_vec = 0:inc:1;
-e2_vec = 0:inc:1;
-e3_vec = 0:inc:1;
+%% uniform resolution 
+
+% e1_vec = 0:inc:1;
+% e2_vec = 0:inc:1;
+% e3_vec = 0:inc:1;
+
+%% non uniform resolution
+thresh1 = 0.9;
+thresh2 = 0.6;
+thresh3 = 0.4;
+
+e1_vec = [0:inc1:thresh1-0.1, thresh1-0.1:inc2: thresh1+0.1, thresh1+0.1:inc1:1 ];
+e2_vec = [0:inc1:thresh2-0.1, thresh2-0.1:inc2: thresh2+0.1, thresh2+0.1:inc1:1 ];
+e3_vec = [0:inc1:thresh3-0.1, thresh3-0.1:inc2: thresh3+0.1, thresh3+0.1:inc1:1 ];
+
 e1_len = numel(e1_vec);
 e2_len = numel(e2_vec);
 e3_len = numel(e3_vec);
@@ -60,6 +74,19 @@ for idx = 1:numel(e1_vec) %run on epsilon values from 0 to 1 in increments of in
     end
     disp(round(idx/numel(e1_vec)*100,1)+"% done in "+round(toc,1)+" (sec)");
 end
+
+%% empiric thresholds
+e1_mat = find(mean_mat(:,1,1) == 0);
+e2_mat = find(mean_mat(1,:,1) == 0);
+e3_mat = find(mean_mat(1,1,:) == 0);
+
+last_z_1 = e1_mat(end);
+last_z_2 = e2_mat(end);
+last_z_3 = e3_mat(end);
+
+thresh1_emp = e1_vec(last_z_1);
+thresh2_emp = e2_vec(last_z_2);
+thresh3_emp = e3_vec(last_z_3);
 
 %% plot graph
 
