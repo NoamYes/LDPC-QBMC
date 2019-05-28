@@ -35,7 +35,7 @@ IiMat = IiCalc(q, dv);
 
 %% Union Model
 
-kapa = 2;
+kapa = 1;
 tranMatUnion = UnionTranMat(kapa,q);
 PiMat = PiCalcUnion(q, dc, tranMatUnion, kapa);
 
@@ -70,7 +70,8 @@ view(-90,90)
 truesize([300 200]);
 xlabel('one bit Erasure [\epsilon_{1}]');
 ylabel('two bits Erasure [\epsilon_{2}]');
-str_title = "total erasure rate for q = " + q;
+str_title = "Total erasure rate for q = " + q + ...
+    " Using Union Model with kapa = " + kapa;
 title(str_title);
 % str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
 %     ", d_{c} = " + dc + ", d_{v} = " + dv;
