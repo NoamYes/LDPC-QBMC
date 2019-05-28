@@ -1,4 +1,4 @@
-function [Pi] = UnionModel(q,sizeArray, tranMat)
+function [Pi] = UnionModel(q,sizeArray, tranMat, kapa)
 
 % Union Model
 %input - q, dc-1 sizes of subgroups
@@ -10,7 +10,7 @@ g_zero = zeros(1,q+1);
 g_zero(1)=1;
 
 N = prod(sizeArray);
-g_N = g_zero*(tranMat)^N;
+g_N = g_zero*(tranMat)^(N/kapa);
 
 indices = 1:numel(g_N);
 powers = ceil(log2(indices-1));

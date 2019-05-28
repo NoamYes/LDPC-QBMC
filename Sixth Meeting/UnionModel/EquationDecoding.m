@@ -1,7 +1,7 @@
 function [Z] = EquationDecoding(eps_vec, PiMat, IiMat, q, dc, dv)
 
 Z = eps_vec;
-iterLen = 100;
+iterLen = 1000;
     for iter = 1:iterLen
 %         tic
         W = w_comp(Z, PiMat, q, dc);
