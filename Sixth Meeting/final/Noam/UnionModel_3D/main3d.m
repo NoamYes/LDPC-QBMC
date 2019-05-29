@@ -47,7 +47,7 @@ PiMat = PiCalcUnion(q, dc, tranMatUnion, kapa);
 
 %% non uniform resolution
 thresh1 = 0.9;
-thresh2 = 0.6;
+thresh2 = 0.7;
 thresh3 = 0.4;
 
 e1_vec = [0:inc1:thresh1-0.1, thresh1-0.1:inc2: thresh1+0.1, thresh1+0.1:inc1:1 ];
@@ -105,8 +105,9 @@ scatter3(xx(:),yy(:),zz(:), 50, mean_mat(:), 'filled')
 ylabel('one bit Erasure [\epsilon_{1}]');
 xlabel('two bits Erasure [\epsilon_{2}]');
 zlabel('three bits Erasure [\epsilon_{3}]');
-% str_title = "total erasure rate for q = " + q;
-% title(str_title);
+str_title = "Total erasure rate for q = " + q + ...
+    " Using Union Model with kapa = " + kapa;
+title(str_title);
 % % str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
 % %     ", d_{c} = " + dc + ", d_{v} = " + dv;
 
