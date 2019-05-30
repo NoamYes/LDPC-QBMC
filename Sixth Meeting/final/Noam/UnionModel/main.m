@@ -6,7 +6,9 @@ dbstop if error
 
 n = 60; %n
 k = round(n/2); %k
-inc = 0.05; %how to increment the epsilon vector
+inc = 0.02; %how to increment the epsilon vector
+inc1 = 0.05;
+inc2 = 0.02;
 tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
@@ -35,15 +37,22 @@ IiMat = IiCalc(q, dv);
 
 %% Union Model
 
-kapa = 1;
-tranMatUnion = UnionTranMat(kapa,q);
-PiMat = PiCalcUnion(q, dc, tranMatUnion, kapa);
+PiMat = PiCalcUnion(q, dc);
 
-%%
+%% uniform e vec
 
 
 e1_vec = 0:inc:1;
 e2_vec = 0:inc:1;
+
+%% non uniform resolution
+% thresh1 = 0.8;
+% thresh2 = 0.4;
+
+% e1_vec = [0:inc1:thresh1-0.1, thresh1-0.1:inc2: thresh1+0.1, thresh1+0.1:inc1:1 ];
+% e2_vec = [0:inc1:thresh2-0.1, thresh2-0.1:inc2: thresh2+0.1, thresh2+0.1:inc1:1 ];
+
+%% 
 
 mean_mat = zeros([numel(e1_vec), numel(e2_vec)]);
 
@@ -70,8 +79,7 @@ view(-90,90)
 truesize([300 200]);
 xlabel('one bit Erasure [\epsilon_{1}]');
 ylabel('two bits Erasure [\epsilon_{2}]');
-str_title = "Total erasure rate for q = " + q + ...
-    " Using Union Model with kapa = " + kapa;
+str_title = "Union Model - Total erasure rate for q = " + q;
 title(str_title);
 % str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
 %     ", d_{c} = " + dc + ", d_{v} = " + dv;

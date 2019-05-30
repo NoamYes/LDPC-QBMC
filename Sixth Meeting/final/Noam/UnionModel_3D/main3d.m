@@ -6,7 +6,7 @@ dbstop if error
 
 n = 60; %n
 k = round(n/2); %k
-inc = 0.05; %how to increment the epsilon vector
+inc = 0.1; %how to increment the epsilon vector
 inc1 = 0.1; %different resolution
 inc2 = 0.01;
 tryMat = 1; %how many matrixes to generate for a given epsilon
@@ -32,31 +32,29 @@ IiMat = IiCalc(q, dv);
 
 %% Union Model
 
-kapa = 1;
-tranMatUnion = UnionTranMat(kapa,q);
-PiMat = PiCalcUnion(q, dc, tranMatUnion, kapa);
+PiMat = PiCalcUnion(q, dc);
 
 %%
 
 
 %% uniform resolution 
 
-% e1_vec = 0:inc:1;
-% e2_vec = 0:inc:1;
-% e3_vec = 0:inc:1;
+e1_vec = 0:inc:1;
+e2_vec = 0:inc:1;
+e3_vec = 0:inc:1;
 
 %% non uniform resolution
-thresh1 = 0.9;
-thresh2 = 0.7;
-thresh3 = 0.4;
-
-e1_vec = [0:inc1:thresh1-0.1, thresh1-0.1:inc2: thresh1+0.1, thresh1+0.1:inc1:1 ];
-e2_vec = [0:inc1:thresh2-0.1, thresh2-0.1:inc2: thresh2+0.1, thresh2+0.1:inc1:1 ];
-e3_vec = [0:inc1:thresh3-0.1, thresh3-0.1:inc2: thresh3+0.1, thresh3+0.1:inc1:1 ];
-
-e1_len = numel(e1_vec);
-e2_len = numel(e2_vec);
-e3_len = numel(e3_vec);
+% thresh1 = 0.9;
+% thresh2 = 0.7;
+% thresh3 = 0.4;
+% 
+% e1_vec = [0:inc1:thresh1-0.1, thresh1-0.1:inc2: thresh1+0.1, thresh1+0.1:inc1:1 ];
+% e2_vec = [0:inc1:thresh2-0.1, thresh2-0.1:inc2: thresh2+0.1, thresh2+0.1:inc1:1 ];
+% e3_vec = [0:inc1:thresh3-0.1, thresh3-0.1:inc2: thresh3+0.1, thresh3+0.1:inc1:1 ];
+% 
+% e1_len = numel(e1_vec);
+% e2_len = numel(e2_vec);
+% e3_len = numel(e3_vec);
 
 mean_mat = zeros([numel(e1_vec), numel(e2_vec), numel(e3_vec)]);
 

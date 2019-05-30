@@ -1,4 +1,4 @@
-function [PiMatrix] = PiCalcUnion(q, dc, tranMat, kapa)
+function [PiMatrix] = PiCalcUnion(q, dc)
 
 
 sizesNum = log2(q)+1;
@@ -8,6 +8,7 @@ PiMatrix = cell(set_vec);
 vec_ndims = ndims(set_mat);
 vec_mat_size = size(set_mat);
 
+
 for idx_vec = 1:numel(set_mat)
     
     I = cell(1, vec_ndims);
@@ -15,6 +16,8 @@ for idx_vec = 1:numel(set_mat)
     sub_idx_vec = cell2mat(I);
     idxCell = num2cell(sub_idx_vec);
     sizeArray = 2.^(sub_idx_vec-1);
+    kapa = max(sizeArray);
+    tranMat = UnionTranMat(kapa, q);
     PiMatrix{idxCell{:}} = UnionModel(q,sizeArray, tranMat, kapa);
 
 end
