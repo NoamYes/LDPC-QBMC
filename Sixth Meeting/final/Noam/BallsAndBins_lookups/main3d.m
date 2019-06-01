@@ -6,9 +6,9 @@ dbstop if error
 
 n = 60; %n
 k = round(n/2); %k
-inc = 0.05; %how to increment the epsilon vector
+inc = 1; %how to increment the epsilon vector
 inc1 = 0.1; %different resolution
-inc2 = 0.01;
+inc2 = 0.5;
 tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
@@ -34,24 +34,33 @@ PiMat = PiCalc(q, dc);
 %%
 
 
-%% uniform resolution 
+%% uniform resolution
 
-% e1_vec = 0:inc:1;
-% e2_vec = 0:inc:1;
-% e3_vec = 0:inc:1;
+e1_vec = 0:inc:1;
+e2_vec = 0:inc:1;
+e3_vec = 0:inc:1;
 
 %% non uniform resolution
-thresh1 = 0.9;
-thresh2 = 0.6;
-thresh3 = 0.4;
+% thresh1 = 0.9;
+% thresh2 = 0.7;
+% thresh3 = 0.4;
+%
+% e1_vec = [0:inc1:thresh1-0.1, thresh1-0.1:inc2: thresh1+0.1, thresh1+0.1:inc1:1 ];
+% e2_vec = [0:inc1:thresh2-0.1, thresh2-0.1:inc2: thresh2+0.1, thresh2+0.1:inc1:1 ];
+% e3_vec = [0:inc1:thresh3-0.1, thresh3-0.1:inc2: thresh3+0.1, thresh3+0.1:inc1:1 ];
+%
+% e1_len = numel(e1_vec);
+% e2_len = numel(e2_vec);
+% e3_len = numel(e3_vec);
 
-e1_vec = [0:inc1:thresh1-0.1, thresh1-0.1:inc2: thresh1+0.1, thresh1+0.1:inc1:1 ];
-e2_vec = [0:inc1:thresh2-0.1, thresh2-0.1:inc2: thresh2+0.1, thresh2+0.1:inc1:1 ];
-e3_vec = [0:inc1:thresh3-0.1, thresh3-0.1:inc2: thresh3+0.1, thresh3+0.1:inc1:1 ];
+%% good resolution just on axis vectors!!!
 
-e1_len = numel(e1_vec);
-e2_len = numel(e2_vec);
-e3_len = numel(e3_vec);
+res_len2 = numel(0:inc2:1);
+e1_vec_axis = [0:inc2:1 zeros(1,res_len2) zeros(1,res_len2)];
+e2_vec_axis = [zeros(1,res_len2) 0:inc2:1 zeros(1,res_len2)];
+e3_vec_axis = [zeros(1,res_len2) zeros(1,res_len2) 0:inc2:1];
+
+%% main decoding 
 
 mean_mat = zeros([numel(e1_vec), numel(e2_vec), numel(e3_vec)]);
 
@@ -101,8 +110,28 @@ ylabel('one bit Erasure [\epsilon_{1}]');
 xlabel('two bits Erasure [\epsilon_{2}]');
 zlabel('three bits Erasure [\epsilon_{3}]');
 % str_title = "total erasure rate for q = " + q;
-% title(str_title);
-% % str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
-% %     ", d_{c} = " + dc + ", d_{v} = " + dv;
+str_title = "Total erasure rate for q = " + q + ...
+    " Using Balls and Bins Model";
+title(str_title);
 
 toc;
+
+
+%% axises only
+
+axis_res = zeros(size(e1_vec_axis));
+axs_t = tic;
+parfor tdx = 1:numel(e1_vec_axis)
+    e1 = e1_vec_axis(tdx);
+    e2 = e2_vec_axis(tdx);
+    e3 = e3_vec_axis(tdx);    
+    e_vec = [(1-e1-e2-e3) e1 e2 e3];
+    [Z] = EquationDecoding(e_vec, PiMat,  IiMat, q, dc, dv);
+    axis_res(tdx) = 1-Z(1);
+%     scatter3(e1,e2,e3,50,1-Z(1),'filled');
+%     hold on;
+    disp(round(tdx/numel(e1_vec_axis)*100,1)+"% done in "+round(toc(axs_t),1)+" (sec)");
+end
+
+figure(1)
+scatter3(e1_vec_axis,e2_vec_axis,e3_vec_axis,50,axis_res,'filled');
