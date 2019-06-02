@@ -65,7 +65,7 @@ view(-90,90)
 truesize([300 200]);
 xlabel('one bit Erasure [\epsilon_{1}]');
 ylabel('two bits Erasure [\epsilon_{2}]');
-str_title = "total erasure rate for q = " + q;
+str_title = "Balls and Bins - total erasure rate for q = " + q;
 title(str_title);
 % str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
 %     ", d_{c} = " + dc + ", d_{v} = " + dv;
