@@ -141,5 +141,7 @@ parfor tdx = 1:numel(e1_vec_axis)
     disp(round(tdx/numel(e1_vec_axis)*100,1)+"% done in "+round(toc(axs_t),1)+" (sec)");
 end
 
+%% plot axis
+
 figure(1)
-scatter3(e1_vec_axis,e2_vec_axis,e3_vec_axis,50,axis_res,'filled');
+scatter3(e2_vec_axis,e1_vec_axis,e3_vec_axis,50,axis_res,'filled');

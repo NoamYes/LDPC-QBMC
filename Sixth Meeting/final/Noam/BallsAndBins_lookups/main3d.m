@@ -6,9 +6,9 @@ dbstop if error
 
 n = 60; %n
 k = round(n/2); %k
-inc = 1; %how to increment the epsilon vector
+inc = 0.05; %how to increment the epsilon vector
 inc1 = 0.1; %different resolution
-inc2 = 0.5;
+inc2 = 0.01;
 tryMat = 1; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
@@ -103,6 +103,7 @@ figure(1)
 % imshow3D(mean_mat, 'XData', e2_vec, 'YData', e1_vec, 'ZData', e3_vec);
 [xx, yy, zz] = meshgrid(e1_vec,e2_vec,e3_vec);
 scatter3(xx(:),yy(:),zz(:), 50, mean_mat(:), 'filled')
+hold on;
 % axis on;
 % view(-90,90)
 % truesize([300 200]);
@@ -133,5 +134,7 @@ parfor tdx = 1:numel(e1_vec_axis)
     disp(round(tdx/numel(e1_vec_axis)*100,1)+"% done in "+round(toc(axs_t),1)+" (sec)");
 end
 
+%% plot axis
+
 figure(1)
-scatter3(e1_vec_axis,e2_vec_axis,e3_vec_axis,50,axis_res,'filled');
+scatter3(e2_vec_axis,e1_vec_axis,e3_vec_axis,50,axis_res,'filled');
