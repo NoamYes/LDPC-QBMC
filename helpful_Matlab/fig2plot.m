@@ -1,5 +1,6 @@
 function [] = fig2plot(fig_name)
-
+%% Usage example: fig2plot("../Second_Meeting/Matlab/Pics/n=2048,dv-dc_4,8_mat=50.fig")
+ 
 fig = openfig(fig_name);
 figure;
 xObj = findobj(fig,'-property','XData');
