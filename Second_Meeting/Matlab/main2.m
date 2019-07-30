@@ -19,11 +19,11 @@ dc = 6;
 H = zeros([n-k, n, tryMat]);
 mean_vec = zeros([1, length(eps_vec)]);
 
-parfor mat = 1:tryMat
+for mat = 1:tryMat
     H(:,:,mat) = Generate_LDCP_H( dv, dc, k, n ); %generate a random H matrix
 end
 
-parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments of inc
+for idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments of inc
     eps = eps_vec(idx);
     totalNoise = zeros(tryVec, tryMat);
     mean_mat = zeros(1, tryMat);
@@ -33,8 +33,8 @@ parfor idx = 1:numel(eps_vec) %run on epsilon values from 0 to 1 in increments o
             totalNoise(j,i) = iter2(H(:,:,i), vec, QM, iterLen, dc); %save the
             %ratio of the noise after iterations to the total noise matrix
         end
-%         disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
-%             round(toc,1)+" (sec)");
+        disp(round((i/tryMat+idx-1)*100/numel(eps_vec),1)+"% done in " + ...
+            round(toc,1)+" (sec)");
     end
     mean_vec(idx) = mean(mean(totalNoise)); %calc the mean of all the noise
     % for a given epsilon
@@ -48,9 +48,9 @@ legend('Erasure','y=x')
 xlabel('Probablity Of Erasure [{\epsilon}]');
 ylabel('Erasure Rate');
 
-dim = [.65 .15 .3 .15];
-str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
-    ", d_{c} = " + dc + ", d_{v} = " + dv;
-annotation('textbox',dim,'String',str,'FitBoxToText','on');
+% dim = [.65 .15 .3 .15];
+% str = "n = " + n + ", mat# = " + tryMat + ", vec# = " + tryVec + ...
+%     ", d_{c} = " + dc + ", d_{v} = " + dv;
+% annotation('textbox',dim,'String',str,'FitBoxToText','on');
 
 toc;
