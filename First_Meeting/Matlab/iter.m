@@ -14,18 +14,18 @@ function [out_vec] = iter(H, vec, QM)
 
         %% Trying generic method (with 1's optional)
 
-    %     QM_indices = H.*repmat(out_vec == QM, length(H(:,end)),1); %% find QM in rows of H overlap with the vec , place 1 instead of QM
-    %     QM_rows = sum(QM_indices, 2); %% sum up the number of QM in each row
-    %     ones_rows = sum(H, 2); %% sum up the number of '1' in each row
-    %     rows_decode_idx = find(QM_rows == 1); %% helpful equations are the rows with 1 QM that we can decode
-    %     helpful_checks = H(rows_decode_idx,:);
-    %     if (isempty(helpful_checks))
-    %         break;
-    %     end
-    %     res_checks = mod(helpful_checks*(out_vec.')-QM,2); %% now the result of the scalar multiplication minus QM modulo 2 is the xor between the other bits
-    %     out_vec(rows_decode_idx,helpful_checks == QM) = res_checks;
-    % 
-    %     
+%         QM_indices = H.*repmat(out_vec == QM, length(H(:,end)),1); %% find QM in rows of H overlap with the vec , place 1 instead of QM
+%         QM_rows = sum(QM_indices, 2); %% sum up the number of QM in each row
+%         ones_rows = sum(H, 2); %% sum up the number of '1' in each row
+%         rows_decode_idx = find(QM_rows == 1); %% helpful equations are the rows with 1 QM that we can decode
+%         helpful_checks = H(rows_decode_idx,:);
+%         if (isempty(helpful_checks))
+%             break;
+%         end
+%         res_checks = mod(helpful_checks*(out_vec.')-QM,2); %% now the result of the scalar multiplication minus QM modulo 2 is the xor between the other bits
+%         out_vec(rows_decode_idx,helpful_checks == QM) = res_checks;
+%     
+%         
 
     end
 

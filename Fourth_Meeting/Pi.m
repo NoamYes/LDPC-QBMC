@@ -5,8 +5,8 @@ function [PiMat] = Pi(t, q, L_vec, dc, looktable, dividetable)
 %     pi_vec = t*ones(1, dc);
 %     const_vec = (q-1)*ones(1, dc);
     
-    % probMat = (q-1)^dc*probMatrix(q, dc, L_vec);
-    load('probMat_q=16.mat');
+    probMat = (q-1)^dc*probMatrix(q, dc, L_vec);
+%     load('probMat_q=4.mat');
     set_mat = zeros(set_vec);
     
     vec_ndims = ndims(set_mat);
