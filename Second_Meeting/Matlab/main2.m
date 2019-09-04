@@ -4,11 +4,11 @@ tic
 % below will be a code generating graph for erasure rate versus dv/dc as
 % requested
 
-n = 600; %n
+n = 120; %n
 k = round(n/2); %k
 QM = 2; %the question mark value > 0
 inc = 0.005; %how to increment the epsilon vector
-tryMat = 1; %how many matrixes to generate for a given epsilon
+tryMat = 5; %how many matrixes to generate for a given epsilon
 tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 

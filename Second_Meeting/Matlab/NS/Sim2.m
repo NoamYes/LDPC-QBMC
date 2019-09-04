@@ -8,8 +8,8 @@ n = 36; %n
 k = round(n/2); %k
 QM = -1; %the question mark value > 0
 inc = 0.005; %how to increment the epsilon vector
-tryMat = 10; %how many matrixes to generate for a given epsilon
-tryVec = 200; %how many noise vector to test each time
+tryMat = 1; %how many matrixes to generate for a given epsilon
+tryVec = 100; %how many noise vector to test each time
 iterLen = 100; %how long will each code iteration be
 
 eps_vec = 0.35:inc:0.45;
